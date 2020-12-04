@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  releaseName: traefik
+  chart:
+    spec:
+      chart: traefik
+      version: 9.11.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: traefik
+  interval: 1m0s
+  values:
+    deployment:
+      replicas: 3
+      podAnnotations:
+        linkerd.io/inject: enabled
+    service:
+      spec:
+        loadBalancerIP: 192.168.2.0
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: traefik
