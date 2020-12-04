@@ -1,0 +1,78 @@
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: linkerd-proxy-injector
+  namespace: linkerd
+spec:
+  secretName: linkerd-proxy-injector-k8s-tls
+  duration: 24h
+  renewBefore: 1h
+  issuerRef:
+    name: webhook-issuer
+    kind: Issuer
+  dnsNames:
+    - linkerd-proxy-injector.linkerd.svc
+  isCA: false
+  keyAlgorithm: ecdsa
+  usages:
+  - server auth
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: linkerd-sp-validator
+  namespace: linkerd
+spec:
+  secretName: linkerd-sp-validator-k8s-tls
+  duration: 24h
+  renewBefore: 1h
+  issuerRef:
+    name: webhook-issuer
+    kind: Issuer
+  dnsNames:
+    - linkerd-sp-validator.linkerd.svc
+  isCA: false
+  keyAlgorithm: ecdsa
+  usages:
+  - server auth
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: linkerd-tap
+  namespace: linkerd
+spec:
+  secretName: linkerd-tap-k8s-tls
+  duration: 24h
+  renewBefore: 1h
+  issuerRef:
+    name: webhook-issuer
+    kind: Issuer
+  dnsNames:
+    - linkerd-tap.linkerd.svc
+  isCA: false
+  keyAlgorithm: ecdsa
+  usages:
+  - server auth
+---
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: linkerd-identity-issuer
+  namespace: linkerd
+spec:
+  secretName: linkerd-identity-issuer
+  duration: 24h
+  renewBefore: 1h
+  issuerRef:
+    name: linkerd-trust-anchor
+    kind: Issuer
+  dnsNames:
+    - identity.linkerd.cluster.local
+  isCA: true
+  keyAlgorithm: ecdsa
+  usages:
+  - cert sign
+  - crl sign
+  - server auth
+  - client auth
