@@ -6,6 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   schedule: "0 0 1-31/2 * *"
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
@@ -28,10 +29,10 @@ spec:
             command:
             - etcdctl
             args:
-            - --cert /etc/kubernetes/pki/etcd/peer.crt
-            - --key /etc/kubernetes/pki/etcd/peer.key
-            - --cacert /etc/kubernetes/pki/etcd/ca.crt
-            - --endpoints https://10.1.10.240:2379
+            - --cert=/etc/kubernetes/pki/etcd/peer.crt
+            - --key=/etc/kubernetes/pki/etcd/peer.key
+            - --cacert=/etc/kubernetes/pki/etcd/ca.crt
+            - --endpoints=https://10.1.10.240:2379
             - defrag
             volumeMounts:
             - mountPath: /etc/kubernetes
