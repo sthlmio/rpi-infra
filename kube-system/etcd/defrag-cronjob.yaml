@@ -3,6 +3,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: etcd-defrag
+  namespace: kube-system
 spec:
   schedule: "0 0 1-31/2 * *"
   jobTemplate:
