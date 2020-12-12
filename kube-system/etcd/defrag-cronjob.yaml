@@ -25,13 +25,13 @@ spec:
           - name: etcd
             image: k8s.gcr.io/etcd:3.4.13-0
             imagePullPolicy: IfNotPresent
-            command:
-              - etcdctl
-              - --cert /etc/kubernetes/pki/etcd/peer.crt
-              - --key /etc/kubernetes/pki/etcd/peer.key
-              - --cacert /etc/kubernetes/pki/etcd/ca.crt
-              - --endpoints https://10.1.10.240:2379
-              - defrag
+            command: etcdctl
+            args:
+            - --cert /etc/kubernetes/pki/etcd/peer.crt
+            - --key /etc/kubernetes/pki/etcd/peer.key
+            - --cacert /etc/kubernetes/pki/etcd/ca.crt
+            - --endpoints https://10.1.10.240:2379
+            - defrag
             volumeMounts:
             - mountPath: /etc/kubernetes
               name: kubernetes
