@@ -8,6 +8,7 @@ spec:
   schedule: "0 0 1-31/2 * *"
   jobTemplate:
     spec:
+      concurrencyPolicy: Forbid
       template:
         spec:
           restartPolicy: OnFailure
@@ -25,7 +26,8 @@ spec:
           - name: etcd
             image: k8s.gcr.io/etcd:3.4.13-0
             imagePullPolicy: IfNotPresent
-            command: etcdctl
+            command:
+            - etcdctl
             args:
             - --cert /etc/kubernetes/pki/etcd/peer.crt
             - --key /etc/kubernetes/pki/etcd/peer.key
