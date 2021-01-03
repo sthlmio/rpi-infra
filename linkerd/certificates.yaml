@@ -1,4 +1,4 @@
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-proxy-injector
@@ -13,11 +13,12 @@ spec:
   dnsNames:
     - linkerd-proxy-injector.linkerd.svc
   isCA: false
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - server auth
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-sp-validator
@@ -32,11 +33,12 @@ spec:
   dnsNames:
     - linkerd-sp-validator.linkerd.svc
   isCA: false
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - server auth
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-tap
@@ -51,11 +53,12 @@ spec:
   dnsNames:
     - linkerd-tap.linkerd.svc
   isCA: false
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - server auth
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-identity-issuer
@@ -70,7 +73,8 @@ spec:
   dnsNames:
     - identity.linkerd.cluster.local
   isCA: true
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - cert sign
   - crl sign
