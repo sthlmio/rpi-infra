@@ -15,7 +15,7 @@ spec:
           hostNetwork: true
           nodeName: rp0
           tolerations:
-          - key: node-role.kubernetes.io/master
+          - key: node-role.kubernetes.io/control-plane
             effect: NoSchedule
           volumes:
           - hostPath:
