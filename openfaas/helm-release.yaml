@@ -16,10 +16,11 @@ spec:
         namespace: openfaas
   interval: 1m0s
   values:
+    generateBasicAuth: true
     serviceType: LoadBalancer
     nodeSelector:
       beta.kubernetes.io/arch: arm64
-    basic_auth: false
+    basic_auth: true
     clusterRole: true
     createCRDs: true
     # See https://www.openfaas.com/support for more
@@ -34,7 +35,7 @@ spec:
       image: ghcr.io/openfaas/faas-netes:0.12.13
     operator:
       image: ghcr.io/openfaas/faas-netes:0.12.13
-      create: false
+      create: true
     queueWorker:
       image: openfaas/queue-worker:0.11.2
       replicas: 3
