@@ -16,7 +16,7 @@ spec:
         namespace: openfaas
   interval: 1m0s
   values:
-    generateBasicAuth: true
+    generateBasicAuth: false
     serviceType: LoadBalancer
     nodeSelector:
       beta.kubernetes.io/arch: arm64
