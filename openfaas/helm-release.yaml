@@ -20,7 +20,7 @@ spec:
     serviceType: LoadBalancer
     nodeSelector:
       beta.kubernetes.io/arch: arm64
-    basic_auth: true
+    basic_auth: false
     clusterRole: true
     createCRDs: true
     # See https://www.openfaas.com/support for more
