@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: certificate
+  namespace: openfaas
+spec:
+  secretName: certificate-secret
+  dnsNames:
+  - faas.sthlm.io
+  issuerRef:
+    name: cluster-issuer-cloudflare-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
