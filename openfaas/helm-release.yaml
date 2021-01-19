@@ -16,6 +16,8 @@ spec:
         namespace: openfaas
   interval: 1m0s
   values:
+    nodeSelector:
+      beta.kubernetes.io/arch: arm64
     basic_auth: false
     clusterRole: true
     createCRDs: true
