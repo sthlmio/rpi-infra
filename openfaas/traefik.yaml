@@ -1,0 +1,80 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: TLSOption
+metadata:
+  name: mintls12
+  namespace: openfaas
+spec:
+  minVersion: VersionTLS12
+  curvePreferences:
+  - secp521r1
+  - secp384r1
+  sniStrict: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: security
+  namespace: openfaas
+spec:
+  headers:
+    frameDeny: true
+    sslRedirect: true
+    browserXssFilter: true
+    contentTypeNosniff: true
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: hsts
+  namespace: openfaas
+spec:
+  headers:
+    stsIncludeSubdomains: true
+    stsPreload: false
+    stsSeconds: 31536000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: l5d-header-middleware
+  namespace: openfaas
+spec:
+  headers:
+    customRequestHeaders:
+      l5d-dst-override: "gateway-external.openfaas.svc.cluster.local:8080"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: remove-headers
+  namespace: openfaas
+spec:
+  headers:
+    customResponseHeaders:
+      Server: ""
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: https
+  namespace: openfaas
+spec:
+  tls:
+    options:
+      name: mintls12
+      namespace: openfaas
+    secretName: certificate-secret
+  entryPoints:
+  - websecure
+  routes:
+  - match: Host(`faas.sthlm.io`)
+    middlewares:
+    - name: l5d-header-middleware
+    - name: security
+    - name: hsts
+    - name: remove-headers
+    kind: Rule
+    services:
+    - kind: Service
+      name: gateway-external
+      port: 8080
