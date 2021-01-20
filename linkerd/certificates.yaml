@@ -5,8 +5,8 @@ metadata:
   namespace: linkerd
 spec:
   secretName: linkerd-proxy-injector-k8s-tls
-  duration: 24h
-  renewBefore: 1h
+  duration: 2160h # 90d
+  renewBefore: 12h
   issuerRef:
     name: webhook-issuer
     kind: Issuer
@@ -25,8 +25,8 @@ metadata:
   namespace: linkerd
 spec:
   secretName: linkerd-sp-validator-k8s-tls
-  duration: 24h
-  renewBefore: 1h
+  duration: 2160h # 90d
+  renewBefore: 12h
   issuerRef:
     name: webhook-issuer
     kind: Issuer
@@ -45,8 +45,8 @@ metadata:
   namespace: linkerd
 spec:
   secretName: linkerd-tap-k8s-tls
-  duration: 24h
-  renewBefore: 1h
+  duration: 2160h # 90d
+  renewBefore: 12h
   issuerRef:
     name: webhook-issuer
     kind: Issuer
