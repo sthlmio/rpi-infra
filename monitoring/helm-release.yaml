@@ -1,26 +1,30 @@
----
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
-metadata:
-  name: prometheus
-  namespace: monitoring
-spec:
-  releaseName: prometheus
-  chart:
-    spec:
-      chart: kube-prometheus-stack
-      version: 9.4.3
-      sourceRef:
-        kind: HelmRepository
-        name: prometheus-community
-        namespace: monitoring
-  interval: 1m0s
-  values:
-    nodeExporter:
-      enabled: false
-    kubeStateMetrics:
-      enabled: false
-    # kube-state-metrics:
-    #   image:
-    #     repository: k8s.gcr.io/kube-state-metrics/kube-state-metrics
-    #     tag: v2.0.0-beta
+# ---
+# apiVersion: helm.toolkit.fluxcd.io/v2beta1
+# kind: HelmRelease
+# metadata:
+#   name: prometheus
+#   namespace: monitoring
+# spec:
+#   releaseName: prometheus
+#   chart:
+#     spec:
+#       chart: kube-prometheus-stack
+#       version: 9.4.3
+#       sourceRef:
+#         kind: HelmRepository
+#         name: prometheus-community
+#         namespace: monitoring
+#   interval: 1m0s
+#   values:
+#     prometheusOperator:
+#       image:
+#         repository: quay.io/prometheus-operator/prometheus-operator
+#         tag: v0.45.0-arm64
+#     nodeExporter:
+#       enabled: false
+#     kubeStateMetrics:
+#       enabled: false
+#     # kube-state-metrics:
+#     #   image:
+#     #     repository: k8s.gcr.io/kube-state-metrics/kube-state-metrics
+#     #     tag: v2.0.0-beta
