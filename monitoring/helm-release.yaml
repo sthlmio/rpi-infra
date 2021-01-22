@@ -52,6 +52,8 @@ spec:
         namespace: monitoring
   interval: 1m0s
   values:
+    service:
+      type: LoadBalancer
     datasources:
       datasources.yaml:
         apiVersion: 1
