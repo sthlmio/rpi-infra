@@ -8,7 +8,7 @@ spec:
   releaseName: prometheus
   chart:
     spec:
-      chart: prometheus-community/kube-prometheus-stack
+      chart: kube-prometheus-stack
       version: 9.4.3
       sourceRef:
         kind: HelmRepository
