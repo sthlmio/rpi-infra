@@ -48,6 +48,10 @@ spec:
         namespace: monitoring
   interval: 1m0s
   values:
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.monitoring.svc.cluster.local
     persistence:
       enabled: true
       size: 5Gi
