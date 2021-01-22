@@ -21,3 +21,11 @@ kubectl port-forward rook-ceph-mgr-a-7f85cd4cb-n2rpq -n rook-ceph 8443:8443
 ```bash
 kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode && echo
 ```
+
+# OpenFaas
+
+## Get login credentials
+
+```bash
+kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo
+```
