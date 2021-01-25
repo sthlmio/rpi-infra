@@ -186,19 +186,19 @@ spec:
     useAllNodes: true
     useAllDevices: false    
     nodes:
-    - name: "10.1.10.240"
+    - name: "rp0"
       devices:
       - name: "sda3"
-    - name: "10.1.10.241"
+    - name: "rp1"
       devices:
       - name: "sda3"
-    - name: "10.1.10.242"
+    - name: "rp2"
       devices:
       - name: "sda1"
-    - name: "10.1.10.243"
+    - name: "rp3"
       devices:
       - name: "sda1"
-    - name: "10.1.10.244"
+    - name: "rp4"
       devices:
       - name: "sdc1"
     config:
