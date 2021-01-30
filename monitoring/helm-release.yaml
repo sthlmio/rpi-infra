@@ -21,6 +21,9 @@ spec:
     kubeStateMetrics:
       enabled: false
     server:
+      global:
+        scrape_interval: 10s
+        scrape_timeout: 8s
       persistentVolume:
         storageClass: rook-ceph-block
     alertmanager:
