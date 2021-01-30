@@ -27,6 +27,9 @@ spec:
       persistentVolume:
         storageClass: rook-ceph-block
     extraScrapeConfigs: |
+      - job_name: etcd
+        static_configs:
+          - targets: ['10.1.10.240:2381']
       - job_name: node
         static_configs:
           - targets: ['10.1.10.240:9100', '10.1.10.241:9100', '10.1.10.242:9100', '10.1.10.243:9100', '10.1.10.244:9100']
