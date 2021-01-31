@@ -19,7 +19,7 @@ spec:
     ports:
       metrics:
         port: 8082
-        expose: false
+        expose: true
         exposedPort: 8082
         protocol: TCP
     additionalArguments:
