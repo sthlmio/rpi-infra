@@ -61,6 +61,10 @@ spec:
         namespace: monitoring
   interval: 1m0s
   values:
+    admin:
+      existingSecret: grafana-credentials
+      userKey: admin-user
+      passwordKey: admin-password
     deploymentStrategy:
       type: Recreate
     service:
