@@ -61,6 +61,8 @@ spec:
         namespace: monitoring
   interval: 1m0s
   values:
+    deploymentStrategy:
+      type: Recreate
     service:
       type: LoadBalancer
     plugins:
