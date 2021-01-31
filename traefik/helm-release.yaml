@@ -16,8 +16,15 @@ spec:
         namespace: traefik
   interval: 1m0s
   values:
+    ports:
+      metrics:
+        port: 8082
+        expose: false
+        exposedPort: 8082
+        protocol: TCP
     additionalArguments:
       - --metrics.prometheus=true
+      - --metrics.prometheus.entryPoint=metrics
       - --entryPoints.metrics.address=:8082
     deployment:
       replicas: 3
