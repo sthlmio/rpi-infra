@@ -16,6 +16,9 @@ spec:
         namespace: traefik
   interval: 1m0s
   values:
+    additionalArguments:
+      - --metrics.prometheus=true
+      - --entryPoints.metrics.address=:8082
     deployment:
       replicas: 3
       podAnnotations:

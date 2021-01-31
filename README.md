@@ -34,6 +34,8 @@ kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-passwor
 
 ## Grafana
 
+http://192.168.2.2/
+
 ```bash
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
 
