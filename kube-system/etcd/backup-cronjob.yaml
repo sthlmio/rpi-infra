@@ -48,7 +48,7 @@ spec:
               mountPath: "/tmp"
           containers:
           - name: backup
-            image: sthlmio/go-gs-backup:1.0.4 # {"$imagepolicy": "flux-system:sthlmio-go-gs-backup"}
+            image: sthlmio/go-gs-backup:1.0.5 # {"$imagepolicy": "flux-system:sthlmio-go-gs-backup"}
             imagePullPolicy: IfNotPresent
             env:
             - name: BUCKET_NAME
