@@ -45,9 +45,9 @@ kubectl port-forward deploy/prometheus-server -n monitoring 9090:9090
 http://192.168.2.2/
 
 ```bash
-kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
+kubectl get secret --namespace monitoring grafana-credentials -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
 
 
-kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+kubectl get secret --namespace monitoring grafana-credentials -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 ```
