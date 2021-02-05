@@ -52,11 +52,11 @@ spec:
             imagePullPolicy: IfNotPresent
             env:
             - name: BUCKET_NAME
-              value: "rpi-etcd-backup"
+              value: "rpi-kubeadm-backup"
             - name: LOCAL_OBJECT_PATH
               value: "/tmp/backup.db"
             - name: REMOTE_OBJECT_PATH
-              value: "backup.db"
+              value: "/etcd/backup.db"
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: "/etc/secret/sthlmio.json"
             volumeMounts:
