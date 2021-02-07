@@ -21,7 +21,8 @@ spec:
     kubeStateMetrics:
       enabled: false
     server:
-      strategy: Recreate
+      strategy:
+        type: Recreate
       retention: "7d"
       global:
         scrape_interval: 10s
