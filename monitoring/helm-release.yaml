@@ -21,6 +21,7 @@ spec:
     kubeStateMetrics:
       enabled: false
     server:
+      retention: "7d"
       global:
         scrape_interval: 10s
         scrape_timeout: 8s
