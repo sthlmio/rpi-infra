@@ -36,9 +36,9 @@ spec:
         format: json
         fields:
           headers:
-            defaultmode: keep
+            defaultmode: drop
             names:
-              Forwarded: keep
+              X-Real-Ip: keep
     service:
       spec:
         externalTrafficPolicy: Local
