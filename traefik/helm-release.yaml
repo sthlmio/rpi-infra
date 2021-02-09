@@ -32,13 +32,19 @@ spec:
         linkerd.io/inject: enabled
     service:
       spec:
+        externalTrafficPolicy: Local
         loadBalancerIP: 192.168.2.0
     affinity:
       podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              topologyKey: kubernetes.io/hostname
-              labelSelector:
-                matchLabels:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
                   app.kubernetes.io/instance: traefik
+            topologyKey: kubernetes.io/hostname
+        # preferredDuringSchedulingIgnoredDuringExecution:
+        #   - weight: 100
+        #     podAffinityTerm:
+        #       topologyKey: kubernetes.io/hostname
+        #       labelSelector:
+        #         matchLabels:
+        #           app.kubernetes.io/instance: traefik
