@@ -29,7 +29,7 @@ spec:
     deployment:
       replicas: 3
       podAnnotations:
-        linkerd.io/inject: enabled
+        linkerd.io/inject: ingress
     service:
       spec:
         externalTrafficPolicy: Local
