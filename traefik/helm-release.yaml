@@ -29,7 +29,7 @@ spec:
     deployment:
       replicas: 3
       podAnnotations:
-        linkerd.io/inject: ingress
+        linkerd.io/inject: disabled
     logs:
       access:
         enabled: true
