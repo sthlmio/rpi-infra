@@ -28,8 +28,8 @@ spec:
       - --entryPoints.metrics.address=:8082
     deployment:
       replicas: 3
-      # podAnnotations:
-      #   linkerd.io/inject: ingress
+      podAnnotations:
+        linkerd.io/inject: ingress
     logs:
       access:
         enabled: true
