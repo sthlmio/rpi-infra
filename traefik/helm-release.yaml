@@ -30,6 +30,7 @@ spec:
       replicas: 3
       podAnnotations:
         linkerd.io/inject: ingress
+        config.linkerd.io/enable-debug-sidecar: "true"
     logs:
       access:
         enabled: true
