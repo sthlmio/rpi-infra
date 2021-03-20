@@ -26,12 +26,10 @@ spec:
       - --metrics.prometheus=true
       - --metrics.prometheus.entryPoint=metrics
       - --entryPoints.metrics.address=:8082
-      - --entryPoints.web.forwardedHeaders.insecure
     deployment:
       replicas: 3
       podAnnotations:
-        linkerd.io/inject: ingress
-        config.linkerd.io/skip-inbound-ports: 80,443
+        linkerd.io/inject: disabled
     logs:
       access:
         enabled: true
