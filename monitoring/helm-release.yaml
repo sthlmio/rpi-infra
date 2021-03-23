@@ -20,7 +20,7 @@ spec:
       enabled: false
     kubeStateMetrics:
       enabled: false
-    server:
+    server:        
       strategy:
         type: Recreate
       retention: "7d"
@@ -29,6 +29,7 @@ spec:
         scrape_timeout: 8s
       persistentVolume:
         storageClass: rook-ceph-block
+        size: 16Gi
     alertmanager:
       persistentVolume:
         storageClass: rook-ceph-block
