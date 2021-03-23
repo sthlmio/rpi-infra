@@ -10,11 +10,7 @@ kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- bash
 
 ### Access dashboard
 
-https://localhost:8443/
-
-```bash
-kubectl port-forward deploy/rook-ceph-mgr-a -n rook-ceph 8443:8443
-```
+https://192.168.2.3:8443/
 
 ### Get login credentials
 
