@@ -30,6 +30,7 @@ spec:
         args:
           - '--resources=pods'
           - '--resources=nodes'
+          - '--resources=namespaces'
         ports:
         - containerPort: 8080
           name: http-metrics
