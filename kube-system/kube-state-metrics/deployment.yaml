@@ -29,6 +29,7 @@ spec:
         name: kube-state-metrics
         args:
           - '--resources=pods'
+          - '--resources=nodes'
         ports:
         - containerPort: 8080
           name: http-metrics
