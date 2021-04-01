@@ -28,9 +28,34 @@ spec:
           timeoutSeconds: 5
         name: kube-state-metrics
         args:
-          - '--resources=pods'
-          - '--resources=nodes'
+          - '--resources=certificatesigningrequests'
+          - '--resources=configmaps'
+          - '--resources=cronjobs'
+          - '--resources=daemonsets'
+          - '--resources=deployments'
+          - '--resources=endpoints'
+          - '--resources=horizontalpodautoscalers'
+          - '--resources=ingresses'
+          - '--resources=jobs'
+          - '--resources=limitranges'
+          - '--resources=mutatingwebhookconfigurations'
           - '--resources=namespaces'
+          - '--resources=networkpolicies'
+          - '--resources=nodes'
+          - '--resources=persistentvolumeclaims'
+          - '--resources=persistentvolumes'
+          - '--resources=poddisruptionbudgets'
+          - '--resources=pods'
+          - '--resources=replicasets'
+          - '--resources=replicationcontrollers'
+          - '--resources=resourcequotas'
+          - '--resources=secrets'
+          - '--resources=services'
+          - '--resources=statefulsets'
+          - '--resources=storageclasses'
+          - '--resources=validatingwebhookconfigurations'
+          - '--resources=verticalpodautoscalers'
+          - '--resources=volumeattachments'
         ports:
         - containerPort: 8080
           name: http-metrics
