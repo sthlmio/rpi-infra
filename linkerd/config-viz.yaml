@@ -1,4 +1,4 @@
-proxyInjector:
+tap:
   externalSecret: true
   caBundle: |
     -----BEGIN CERTIFICATE-----
@@ -12,7 +12,7 @@ proxyInjector:
     MEQCIGD6Bckk6mGutKnZFMqrraegS0XuQxDsqnPgYSdBg+sVAiBYvbJu6Hyeqj2c
     45+PBDFpLjnvtqd3l+0YOt8H1uOUvw==
     -----END CERTIFICATE-----
-profileValidator:
+tapInjector:
   externalSecret: true
   caBundle: |
     -----BEGIN CERTIFICATE-----

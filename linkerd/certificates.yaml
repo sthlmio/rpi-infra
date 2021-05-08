@@ -38,25 +38,25 @@ spec:
   usages:
   - server auth
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: linkerd-tap
-  namespace: linkerd
-spec:
-  secretName: linkerd-tap-k8s-tls
-  duration: 24h
-  renewBefore: 2h
-  issuerRef:
-    name: webhook-issuer
-    kind: Issuer
-  dnsNames:
-    - linkerd-tap.linkerd.svc
-  isCA: false
-  privateKey:
-    algorithm: ECDSA
-  usages:
-  - server auth
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: linkerd-tap
+#   namespace: linkerd
+# spec:
+#   secretName: linkerd-tap-k8s-tls
+#   duration: 24h
+#   renewBefore: 2h
+#   issuerRef:
+#     name: webhook-issuer
+#     kind: Issuer
+#   dnsNames:
+#     - linkerd-tap.linkerd.svc
+#   isCA: false
+#   privateKey:
+#     algorithm: ECDSA
+#   usages:
+#   - server auth
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -80,3 +80,46 @@ spec:
   - crl sign
   - server auth
   - client auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tap
+  namespace: linkerd-viz
+spec:
+  secretName: tap-k8s-tls
+  duration: 24h
+  renewBefore: 2h
+  issuerRef:
+    name: webhook-issuer
+    kind: Issuer
+  commonName: tap.linkerd-viz.svc
+  dnsNames:
+  - tap.linkerd-viz.svc
+  isCA: false
+  privateKey:
+    algorithm: ECDSA
+  usages:
+  - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: linkerd-tap-injector
+  namespace: linkerd-viz
+spec:
+  secretName: tap-injector-k8s-tls
+  duration: 24h
+  renewBefore: 2h
+  issuerRef:
+    name: webhook-issuer
+    kind: Issuer
+  commonName: tap-injector.linkerd-viz.svc
+  dnsNames:
+  - tap-injector.linkerd-viz.svc
+  isCA: false
+  privateKey:
+    algorithm: ECDSA
+  usages:
+  - server auth
+---
