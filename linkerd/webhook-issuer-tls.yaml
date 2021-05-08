@@ -30,6 +30,6 @@ spec:
     metadata:
       creationTimestamp: null
       name: webhook-issuer-tls
-      namespace: linkerd
+      namespace: linkerd-viz
     type: kubernetes.io/tls
 
