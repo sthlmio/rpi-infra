@@ -1,34 +1,38 @@
-# Ceph Rook
+# rpi-infra
 
-## Toolbox
+GitOps repo for infrastructure applications running on our Raspberry Pi Kubernetes cluster.
+
+## Ceph Rook
+
+### Toolbox
 
 ```bash
 kubectl -n rook-ceph exec -it deploy/rook-ceph-tools -- bash
 ```
 
-## Dashboard
+### Dashboard
 
-### Access dashboard
+#### Access dashboard
 
 https://192.168.2.3:8443/
 
-### Get login credentials
+#### Get login credentials
 
 ```bash
 kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode && echo
 ```
 
-# OpenFaas
+## OpenFaas
 
-## Get login credentials
+### Get login credentials
 
 ```bash
 kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo
 ```
 
-# Monitoring
+## Monitoring
 
-## Prometheus
+### Prometheus
 
 http://127.0.0.1:9090
 
@@ -36,7 +40,7 @@ http://127.0.0.1:9090
 kubectl port-forward deploy/prometheus-server -n monitoring 9090:9090
 ```
 
-## Grafana
+### Grafana
 
 http://192.168.2.2/
 
