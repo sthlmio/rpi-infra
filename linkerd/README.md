@@ -3,10 +3,10 @@
 ```
 brew upgrade linkerd
 
-linkerd install -f linkerd/config.yaml > linkerd/components.yaml
-linkerd upgrade > linkerd/components.yaml
+linkerd install -f config.yaml > components.yaml
+linkerd upgrade > components.yaml
 
-linkerd viz install --config=linkerd/config-viz.yaml > linkerd/viz.yaml
+linkerd viz install -f config-viz.yaml > viz.yaml
 ```
 
 ## Restart deployments
