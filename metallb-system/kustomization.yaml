@@ -2,6 +2,7 @@
 namespace: metallb-system
 
 resources:
-  - github.com/metallb/metallb//manifests?ref=v0.9.6
+  - https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
+  - https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml
   - configmap.yaml
   - sealed-secret.yaml
