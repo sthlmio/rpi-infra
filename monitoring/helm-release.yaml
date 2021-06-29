@@ -47,7 +47,7 @@ spec:
         static_configs:
           - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
     serverFiles:
-      recording_rules.yml: |
+      recording_rules.yml:
         "groups":
           - "name": "kube-apiserver.rules"
             "rules":
