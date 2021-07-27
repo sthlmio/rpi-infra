@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: cert-manager
-      version: v1.3.1
+      version: v1.4.1
       sourceRef:
         kind: HelmRepository
         name: cert-manager
@@ -17,11 +17,3 @@ spec:
   interval: 1m0s
   values:
     installCRDs: true
-    image:
-      repository: quay.io/jetstack/cert-manager-controller-arm64
-    cainjector:
-      image:
-        repository: quay.io/jetstack/cert-manager-cainjector-arm64
-    webhook:
-      image:
-        repository: quay.io/jetstack/cert-manager-webhook-arm64
