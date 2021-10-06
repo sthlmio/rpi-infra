@@ -10,6 +10,7 @@ metadata:
     linkerd.io/extension: viz
   annotations:
     linkerd.io/inject: enabled
+    config.linkerd.io/proxy-await: "enabled"
 ---
 ###
 ### Metrics API RBAC
@@ -37,6 +38,9 @@ rules:
 - apiGroups: ["split.smi-spec.io"]
   resources: ["trafficsplits"]
   verbs: ["list", "get", "watch"]
+- apiGroups: ["policy.linkerd.io"]
+  resources: ["servers", "serverauthorizations"]
+  verbs: ["list", "get"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -292,11 +296,11 @@ rules:
 - apiGroups: ["admissionregistration.k8s.io"]
   resources: ["mutatingwebhookconfigurations", "validatingwebhookconfigurations"]
   verbs: ["list"]
-- apiGroups: ["policy"]
-  resources: ["podsecuritypolicies"]
-  verbs: ["list"]
 - apiGroups: ["linkerd.io"]
   resources: ["serviceprofiles"]
+  verbs: ["list"]
+- apiGroups: [""]
+  resources: ["nodes"]
   verbs: ["list"]
 - apiGroups: ["apiregistration.k8s.io"]
   resources: ["apiservices"]
@@ -372,31 +376,71 @@ metadata:
     component: web
     namespace: linkerd-viz
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
 metadata:
-  name: viz-psp
   namespace: linkerd-viz
+  name: admin
   labels:
     linkerd.io/extension: viz
-    namespace: linkerd-viz
-roleRef:
-  kind: Role
-  name: psp
-  apiGroup: rbac.authorization.k8s.io
-subjects:
-- kind: ServiceAccount
-  name: tap
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+  port: admin-http
+  proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
   namespace: linkerd-viz
-- kind: ServiceAccount
-  name: web
+  name: admin
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  server:
+    name: admin
+  client:
+    # for kubelet probes and prometheus scraping
+    unauthenticated: true
+
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
   namespace: linkerd-viz
-- kind: ServiceAccount
-  name: grafana
+  name: proxy-admin
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+  port: linkerd-admin
+  proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
   namespace: linkerd-viz
-- kind: ServiceAccount
-  name: prometheus
-  namespace: linkerd-viz
+  name: proxy-admin
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  server:
+    name: proxy-admin
+  client:
+    # for kubelet probes
+    unauthenticated: true
+
 ---
 ###
 ### Metrics API
@@ -410,7 +454,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 spec:
   type: ClusterIP
   selector:
@@ -425,12 +469,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: metrics-api
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.10.2
+    app.kubernetes.io/version: stable-2.11.0
     component: metrics-api
   name: metrics-api
   namespace: linkerd-viz
@@ -443,8 +487,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 0d5b035f4d141dc2c13e1f89046de78fe0fb1208075734c3977400b866f2db51
-        linkerd.io/created-by: linkerd/helm stable-2.10.2
+        checksum/config: 951a7b61ff59229914ca604c671353e5fdc0eda710bde2bfbb50c9225225babe
+        linkerd.io/created-by: linkerd/helm stable-2.11.0
       labels:
         linkerd.io/extension: viz
         component: metrics-api
@@ -455,9 +499,10 @@ spec:
       - args:
         - -controller-namespace=linkerd
         - -log-level=info
+        - -log-format=plain
         - -cluster-domain=cluster.local
         - -prometheus-url=http://prometheus.linkerd-viz.svc.cluster.local:9090
-        image: cr.l5d.io/linkerd/metrics-api:stable-2.10.2
+        image: cr.l5d.io/linkerd/metrics-api:stable-2.11.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -480,6 +525,43 @@ spec:
           runAsUser: 2103
       serviceAccountName: metrics-api
 ---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: metrics-api
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: metrics-api
+  port: http
+  proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
+  namespace: linkerd-viz
+  name: metrics-api
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  server:
+    name: metrics-api
+  client:
+    meshTLS:
+      serviceAccounts:
+      - name: web
+      - name: prometheus
+---
 ###
 ### Grafana
 ###
@@ -493,7 +575,7 @@ metadata:
     component: grafana
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 data:
   grafana.ini: |-
     instance_name = grafana
@@ -510,6 +592,11 @@ data:
     check_for_updates = false
     [panels]
     disable_sanitize_html = true
+    [log]
+    mode = console
+    [log.console]
+    format = text
+    level = info
   datasources.yaml: |-
     apiVersion: 1
     datasources:
@@ -547,7 +634,7 @@ metadata:
     component: grafana
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 spec:
   type: ClusterIP
   selector:
@@ -562,12 +649,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: grafana
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.10.2
+    app.kubernetes.io/version: stable-2.11.0
     component: grafana
     namespace: linkerd-viz
   name: grafana
@@ -582,7 +669,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.10.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.0
       labels:
         linkerd.io/extension: viz
         component: grafana
@@ -598,7 +685,7 @@ spec:
         # see https://github.com/grafana/grafana/issues/20096
         - name: GODEBUG
           value: netdns=go
-        image: cr.l5d.io/linkerd/grafana:stable-2.10.2
+        image: cr.l5d.io/linkerd/grafana:stable-2.11.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -637,6 +724,41 @@ spec:
           name: grafana-config
         name: grafana-config
 ---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: grafana
+  labels:
+    linkerd.io/extension: viz
+    component: grafana
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: grafana
+  port: http
+  proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
+  namespace: linkerd-viz
+  name: grafana
+  labels:
+    linkerd.io/extension: viz
+    component: grafana
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  server:
+    name: grafana
+  client:
+    # web, prometheus and the kubelet probes
+    unauthenticated: true
+---
 ###
 ### Prometheus
 ###
@@ -650,7 +772,7 @@ metadata:
     component: prometheus
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 data:
   prometheus.yml: |-
     global:
@@ -795,7 +917,7 @@ metadata:
     component: prometheus
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 spec:
   type: ClusterIP
   selector:
@@ -810,12 +932,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.10.2
+    app.kubernetes.io/version: stable-2.11.0
     component: prometheus
     namespace: linkerd-viz
   name: prometheus
@@ -830,7 +952,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.10.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.0
       labels:
         linkerd.io/extension: viz
         component: prometheus
@@ -843,6 +965,7 @@ spec:
       containers:
       - args:
         - --log.level=info
+        - --log.format=logfmt
         - --config.file=/etc/prometheus/prometheus.yml
         - --storage.tsdb.path=/data
         - --storage.tsdb.retention.time=6h
@@ -897,7 +1020,7 @@ metadata:
     component: tap
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 spec:
   type: ClusterIP
   selector:
@@ -915,12 +1038,12 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: tap
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.10.2
+    app.kubernetes.io/version: stable-2.11.0
     component: tap
     namespace: linkerd-viz
   name: tap
@@ -936,7 +1059,7 @@ spec:
     metadata:
       annotations:
         checksum/config: dab3451dd1cc4cbe7daf9051a01315b890940374db688f5f9d78e9e41018e1da
-        linkerd.io/created-by: linkerd/helm stable-2.10.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.0
       labels:
         linkerd.io/extension: viz
         component: tap
@@ -949,8 +1072,9 @@ spec:
         - api
         - -api-namespace=linkerd
         - -log-level=info
+        - -log-format=plain
         - -identity-trust-domain=cluster.local
-        image: cr.l5d.io/linkerd/tap:stable-2.10.2
+        image: cr.l5d.io/linkerd/tap:stable-2.11.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -982,6 +1106,41 @@ spec:
       - name: tls
         secret:
           secretName: tap-k8s-tls
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: tap-api
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: tap
+  port: apiserver
+  proxyProtocol: TLS
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
+  namespace: linkerd-viz
+  name: tap
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  server:
+    name: tap-api
+  client:
+    # traffic coming from kube-api
+    unauthenticated: true
 ---
 ###
 ### Tap Injector RBAC
@@ -1054,7 +1213,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 spec:
   type: ClusterIP
   selector:
@@ -1069,7 +1228,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: tap-injector
@@ -1086,7 +1245,7 @@ spec:
     metadata:
       annotations:
         checksum/config: 44f0702c9030b5af0baffaf9ce1a0f2c769d16d7f6c15649be6674ddb1c30e41
-        linkerd.io/created-by: linkerd/helm stable-2.10.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.0
       labels:
         linkerd.io/extension: viz
         component: tap-injector
@@ -1096,9 +1255,10 @@ spec:
       containers:
       - args:
         - injector
-        - -tap-service-name=tap.linkerd-viz.serviceaccount.identity.$(_l5d_ns).$(_l5d_trustdomain)
+        - -tap-service-name=tap.linkerd-viz.serviceaccount.identity.linkerd.cluster.local
         - -log-level=info
-        image: cr.l5d.io/linkerd/tap:stable-2.10.2
+        - -log-format=plain
+        image: cr.l5d.io/linkerd/tap:stable-2.11.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1129,6 +1289,41 @@ spec:
         secret:
           secretName: tap-injector-k8s-tls
 ---
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: tap-injector-webhook
+  labels:
+    linkerd.io/extension: viz
+    component: tap-injector
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: tap-injector
+  port: tap-injector
+  proxyProtocol: TLS
+---
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
+  namespace: linkerd-viz
+  name: tap-injector
+  labels:
+    linkerd.io/extension: viz
+    component: tap-injector
+  annotations:
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
+spec:
+  server:
+    name: tap-injector-webhook
+  client:
+    # traffic coming from kube-api
+    unauthenticated: true
+---
 ###
 ### Web
 ###
@@ -1142,7 +1337,7 @@ metadata:
     component: web
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
 spec:
   type: ClusterIP
   selector:
@@ -1160,12 +1355,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.10.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.0
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: web
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.10.2
+    app.kubernetes.io/version: stable-2.11.0
     component: web
     namespace: linkerd-viz
   name: web
@@ -1180,7 +1375,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.10.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.0
       labels:
         linkerd.io/extension: viz
         component: web
@@ -1190,15 +1385,15 @@ spec:
         beta.kubernetes.io/os: linux
       containers:
       - args:
-        - -linkerd-controller-api-addr=linkerd-controller-api.linkerd.svc.cluster.local:8085
         - -linkerd-metrics-api-addr=metrics-api.linkerd-viz.svc.cluster.local:8085
         - -cluster-domain=cluster.local
         - -grafana-addr=grafana.linkerd-viz.svc.cluster.local:3000
         - -controller-namespace=linkerd
         - -viz-namespace=linkerd-viz
         - -log-level=info
+        - -log-format=plain
         - -enforced-host=^(localhost|127\.0\.0\.1|web\.linkerd-viz\.svc\.cluster\.local|web\.linkerd-viz\.svc|\[::1\])(:\d+)?$
-        image: cr.l5d.io/linkerd/web:stable-2.10.2
+        image: cr.l5d.io/linkerd/web:stable-2.11.0
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1220,3 +1415,111 @@ spec:
         securityContext:
           runAsUser: 2103
       serviceAccountName: web
+---
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: metrics-api.linkerd-viz.svc.cluster.local
+  namespace: linkerd-viz
+spec:
+  routes:
+  - name: POST /api/v1/StatSummary
+    condition:
+      method: POST
+      pathRegex: /api/v1/StatSummary
+  - name: POST /api/v1/TopRoutes
+    condition:
+      method: POST
+      pathRegex: /api/v1/TopRoutes
+  - name: POST /api/v1/ListPods
+    condition:
+      method: POST
+      pathRegex: /api/v1/ListPods
+  - name: POST /api/v1/ListServices
+    condition:
+      method: POST
+      pathRegex: /api/v1/ListServices
+  - name: POST /api/v1/SelfCheck
+    condition:
+      method: POST
+      pathRegex: /api/v1/SelfCheck
+  - name: POST /api/v1/Gateways
+    condition:
+      method: POST
+      pathRegex: /api/v1/Gateways
+  - name: POST /api/v1/Edges
+    condition:
+      method: POST
+      pathRegex: /api/v1/Edges
+---
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: prometheus.linkerd-viz.svc.cluster.local
+  namespace: linkerd-viz
+spec:
+  routes:
+  - name: POST /api/v1/query
+    condition:
+      method: POST
+      pathRegex: /api/v1/query
+  - name: GET /api/v1/query_range
+    condition:
+      method: GET
+      pathRegex: /api/v1/query_range
+  - name: GET /api/v1/series
+    condition:
+      method: GET
+      pathRegex: /api/v1/series
+---
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: grafana.linkerd-viz.svc.cluster.local
+  namespace: linkerd-viz
+spec:
+  routes:
+  - name: GET /api/annotations
+    condition:
+      method: GET
+      pathRegex: /api/annotations
+  - name: GET /api/dashboards/tags
+    condition:
+      method: GET
+      pathRegex: /api/dashboards/tags
+  - name: GET /api/dashboards/uid/{uid}
+    condition:
+      method: GET
+      pathRegex: /api/dashboards/uid/.*
+  - name: GET /api/dashboard/{dashboard}
+    condition:
+      method: GET
+      pathRegex: /api/dashboard/.*
+  - name: GET /api/datasources/proxy/1/api/v1/series
+    condition:
+      method: GET
+      pathRegex: /api/datasources/proxy/1/api/v1/series
+  - name: GET /api/datasources/proxy/1/api/v1/query_range
+    condition:
+      method: GET
+      pathRegex: /api/datasources/proxy/1/api/v1/query_range
+  - name: GET /api/search
+    condition:
+      method: GET
+      pathRegex: /api/search
+  - name: GET /d/{uid}/{dashboard-name}
+    condition:
+      method: GET
+      pathRegex: /d/[^/]*/.*
+  - name: GET /public/build/{style}.css
+    condition:
+      method: GET
+      pathRegex: /public/build/.*\.css
+  - name: GET /public/fonts/{font}
+    condition:
+      method: GET
+      pathRegex: /public/fonts/.*
+  - name: GET /public/img/{img}
+    condition:
+      method: GET
+      pathRegex: /public/img/.*
