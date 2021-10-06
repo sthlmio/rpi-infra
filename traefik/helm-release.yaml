@@ -30,6 +30,7 @@ spec:
       replicas: 3
       podAnnotations:
         linkerd.io/inject: ingress
+        config.linkerd.io/skip-outbound-ports: 443
         config.linkerd.io/opaque-ports: 8443,8000
     logs:
       access:
