@@ -6,4 +6,3 @@ resources:
 - ./issuers.yaml
 - ./linkerd-trust-anchor.yaml
 - ./webhook-issuer-tls.yaml
-- ./viz.yaml
