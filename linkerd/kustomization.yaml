@@ -5,5 +5,5 @@ resources:
 - ./components.yaml
 - ./issuers.yaml
 - ./linkerd-trust-anchor.yaml
-- ./webhook-trust-anchor.yaml
+- ./webhook-issuer-tls.yaml
 - ./viz.yaml
