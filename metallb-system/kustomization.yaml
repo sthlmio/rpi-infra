@@ -1,6 +1,6 @@
-# kustomization.yml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: metallb-system
-
 resources:
   - https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/namespace.yaml
   - https://raw.githubusercontent.com/metallb/metallb/v0.9.6/manifests/metallb.yaml
