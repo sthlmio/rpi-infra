@@ -28,11 +28,11 @@ spec:
         scrape_interval: 10s
         scrape_timeout: 8s
       persistentVolume:
-        storageClass: rook-ceph-block
+        storageClass: longhorn
         size: 16Gi
     alertmanager:
       persistentVolume:
-        storageClass: rook-ceph-block
+        storageClass: longhorn
     extraScrapeConfigs: |
       - job_name: etcd
         static_configs:
@@ -772,4 +772,4 @@ spec:
     persistence:
       enabled: true
       size: 5Gi
-      storageClassName: rook-ceph-block
+      storageClassName: longhorn
