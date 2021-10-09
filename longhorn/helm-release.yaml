@@ -19,3 +19,6 @@ spec:
     defaultSettings:
       createDefaultDiskLabeledNodes: true
       defaultDataPath: /var/lib/longhorn/
+    service:
+      ui:
+        type: LoadBalancer
