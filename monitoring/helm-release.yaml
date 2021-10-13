@@ -30,9 +30,23 @@ spec:
       persistentVolume:
         storageClass: longhorn
         size: 16Gi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/storage
+                operator: Exists
     alertmanager:
       persistentVolume:
         storageClass: longhorn
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/storage
+                operator: Exists
     extraScrapeConfigs: |
       - job_name: etcd
         static_configs:
@@ -773,3 +787,10 @@ spec:
       enabled: true
       size: 5Gi
       storageClassName: longhorn
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node-role.kubernetes.io/storage
+              operator: Exists
