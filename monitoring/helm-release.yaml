@@ -27,9 +27,9 @@ spec:
       global:
         scrape_interval: 10s
         scrape_timeout: 8s
-      persistentVolume:
-        storageClass: longhorn
-        size: 16Gi
+      # persistentVolume:
+      #   storageClass: longhorn
+      #   size: 16Gi
     alertmanager:
       persistentVolume:
         storageClass: longhorn
@@ -769,7 +769,7 @@ spec:
         - name: Prometheus
           type: prometheus
           url: http://prometheus-server.monitoring.svc.cluster.local
-    persistence:
-      enabled: true
-      size: 5Gi
-      storageClassName: longhorn
+    # persistence:
+    #   enabled: true
+    #   size: 5Gi
+    #   storageClassName: longhorn
