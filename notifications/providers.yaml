@@ -1,0 +1,33 @@
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: slack
+  namespace: flux-system
+spec:
+  type: slack
+  channel: gitops
+  secretRef:
+    name: slack-url
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: rpi-apps
+  namespace: flux-system
+spec:
+  type: github
+  address: https://github.com/sthlmio/rpi-apps
+  secretRef:
+    name: github-api-token
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta1
+kind: Provider
+metadata:
+  name: rpi-infra
+  namespace: flux-system
+spec:
+  type: github
+  address: https://github.com/sthlmio/rpi-infra
+  secretRef:
+    name: github-api-token
