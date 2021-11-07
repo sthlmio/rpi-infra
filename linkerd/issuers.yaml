@@ -1,5 +1,5 @@
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: webhook-issuer
@@ -8,7 +8,7 @@ spec:
   ca:
     secretName: webhook-issuer-tls
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: linkerd-trust-anchor
