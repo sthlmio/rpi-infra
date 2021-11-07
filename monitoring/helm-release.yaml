@@ -20,19 +20,23 @@ spec:
       enabled: false
     kubeStateMetrics:
       enabled: false
-    server:        
+    server:
+      statefulSet:
+        enabled: true
       strategy:
         type: Recreate
       retention: "7d"
       global:
         scrape_interval: 10s
         scrape_timeout: 8s
-      # persistentVolume:
-      #   storageClass: longhorn
-      #   size: 16Gi
-    alertmanager:
       persistentVolume:
-        storageClass: longhorn
+        storageClass: local-path
+        size: 16Gi
+    alertmanager:
+      statefulSet:
+        enabled: true
+      persistentVolume:
+        storageClass: local-path
     extraScrapeConfigs: |
       - job_name: etcd
         static_configs:
@@ -769,7 +773,3 @@ spec:
         - name: Prometheus
           type: prometheus
           url: http://prometheus-server.monitoring.svc.cluster.local
-    # persistence:
-    #   enabled: true
-    #   size: 5Gi
-    #   storageClassName: longhorn
