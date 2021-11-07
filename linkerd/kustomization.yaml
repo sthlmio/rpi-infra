@@ -7,4 +7,3 @@ resources:
 - ./certificates.yaml
 - ./issuers.yaml
 - ./components.yaml
-- ./cni.yaml
