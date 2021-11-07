@@ -3,7 +3,12 @@
 ```
 brew upgrade linkerd
 
-linkerd viz install -f config.yaml > components.yaml
+linkerd viz install \
+  --set tap.externalSecret=true \
+  --set-file tap.caBundle=ca.crt \
+  --set tapInjector.externalSecret=true \
+  --set-file tapInjector.caBundle=ca.crt \
+  > components.yaml
 ```
 
 ## Restart deployments
