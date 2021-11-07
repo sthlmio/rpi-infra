@@ -1,19 +1,5 @@
 ---
 ###
-### Linkerd Namespace
-###
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: linkerd
-  annotations:
-    linkerd.io/inject: disabled
-  labels:
-    linkerd.io/is-control-plane: "true"
-    config.linkerd.io/admission-webhooks: disabled
-    linkerd.io/control-plane-ns: linkerd
----
-###
 ### Identity Controller Service RBAC
 ###
 kind: ClusterRole
@@ -131,8 +117,8 @@ webhooks:
       name: linkerd-sp-validator
       namespace: linkerd
       path: "/"
-    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJrakNDQVRtZ0F3SUJBZ0lRZDZ6Q3lac2o1WktGcUZ0K0ZpMFl4REFLQmdncWhrak9QUVFEQWpBb01TWXcKSkFZRFZRUURFeDEzWldKb2IyOXJMbXhwYm10bGNtUXVZMngxYzNSbGNpNXNiMk5oYkRBZUZ3MHlNREV5TURReQpNREExTkROYUZ3MHpNREV5TURJeU1EQTFORE5hTUNneEpqQWtCZ05WQkFNVEhYZGxZbWh2YjJzdWJHbHVhMlZ5ClpDNWpiSFZ6ZEdWeUxteHZZMkZzTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFS0pzQldkUUsKU2l0UEhWd2U0Y1RWSVliR3FUMFhDVmFybmtOTU5Va3FxSDd5bHAvK3c1LzlLTmRHTURiMUczeE5HNWZHeGxkMQpKWGRMTkhjNTJ3d3JDNk5GTUVNd0RnWURWUjBQQVFIL0JBUURBZ0VHTUJJR0ExVWRFd0VCL3dRSU1BWUJBZjhDCkFRRXdIUVlEVlIwT0JCWUVGSmxyRXdtS2pPQ25UelE1T3hQOHF0VXFqNm4rTUFvR0NDcUdTTTQ5QkFNQ0EwY0EKTUVRQ0lHRDZCY2trNm1HdXRLblpGTXFycmFlZ1MwWHVReERzcW5QZ1lTZEJnK3NWQWlCWXZiSnU2SHllcWoyYwo0NStQQkRGcExqbnZ0cWQzbCswWU90OEgxdU9Vdnc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t
-  failurePolicy: Ignore
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJsRENDQVRxZ0F3SUJBZ0lSQU9nSzRZTG5vL0l6dVNmNXhDQk0vOUV3Q2dZSUtvWkl6ajBFQXdJd0tERW0KTUNRR0ExVUVBeE1kZDJWaWFHOXZheTVzYVc1clpYSmtMbU5zZFhOMFpYSXViRzlqWVd3d0hoY05NakV4TVRBMwpNREExTVRNeldoY05NekV4TVRBMU1EQTFNVE16V2pBb01TWXdKQVlEVlFRREV4MTNaV0pvYjI5ckxteHBibXRsCmNtUXVZMngxYzNSbGNpNXNiMk5oYkRCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpsUS9nUjkKR2lWNC9ScldHL1F5OUpSTktOYVYxK2l2QUJyUkJQVjN5VFp0cFNoOWo2b3NDRWgvZDAvVmJCTHhQd1QwSmtVRQpWOU9DeUdVNjF0ZWhPeXlqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lCQmpBU0JnTlZIUk1CQWY4RUNEQUdBUUgvCkFnRUJNQjBHQTFVZERnUVdCQlN5NzAyVXlCcEhyblBJbzduTENCUUF4V0pqL2pBS0JnZ3Foa2pPUFFRREFnTkkKQURCRkFpRUF3c3VHbG9sVmcwOFNqT2JzbUlnbnUvWGZ4RlNJbSt4ZDlKK0diTmN5L0ZjQ0lIWkJ3KzFuNnlSdQorU01TVlpZanJiVUo1SU1WSXYwclFOY08xVUhsR3RrZgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t
+  failurePolicy: Fail
   admissionReviewVersions: ["v1", "v1beta1"]
   rules:
   - operations: ["CREATE", "UPDATE"]
@@ -161,8 +147,8 @@ webhooks:
       name: linkerd-policy-validator
       namespace: linkerd
       path: "/"
-    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURXVENDQWtHZ0F3SUJBZ0lSQUo5Y1JmU1MrM210MGxINWttbEVjM1l3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa2JHbHVhMlZ5WkMxd2IyeHBZM2t0ZG1Gc2FXUmhkRzl5TG14cGJtdGxjbVF1YzNaagpNQjRYRFRJeE1URXdOakl3TVRVeE1Gb1hEVEl5TVRFd05qSXdNVFV4TUZvd0x6RXRNQ3NHQTFVRUF4TWtiR2x1CmEyVnlaQzF3YjJ4cFkza3RkbUZzYVdSaGRHOXlMbXhwYm10bGNtUXVjM1pqTUlJQklqQU5CZ2txaGtpRzl3MEIKQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBMGNXbXpQMll5V3V2OWVwbXpQLzAxbURsejZqcndRNkNMS01wNUlUbwprNFhBZy9EZEhROVptVjRFV2NqSHo1bzY1eU91dlVPR1hJVkxmQy9GVU1LRWExS09vQ214bnFydUhNVHVBb3gyCnluZ283V2tNY1plczNVVkY4bDZDRUhQU1VaWGJtc0ZiOFNKbWd1VVE2NVNHUU5INzY4UTBscklybWJua0dPNHgKcExQNnJQMzNVVVg2SUVFcHNnN1o0bGNMV3ZmaWNsY20rZXRjOFh1VnU2YzYxbCtDREZXQ2twMGNoRVR0R0R2UQpBSkRFYnI4Zk9DUXlJL2gzcHVyc1pvTlFaOGdpQkRuMHBUdjFVdHlvY011SnkxZkZCUml2cGJVdnlEa2o2N2k3CkpsWEJPSVo0S0t1SzBFRDFJVDhEZ0xzR1dxK1JyWk45aHZzRzJPcWVMMk5wZndJREFRQUJvM0F3YmpBT0JnTlYKSFE4QkFmOEVCQU1DQmFBd0hRWURWUjBsQkJZd0ZBWUlLd1lCQlFVSEF3RUdDQ3NHQVFVRkJ3TUNNQXdHQTFVZApFd0VCL3dRQ01BQXdMd1lEVlIwUkJDZ3dKb0lrYkdsdWEyVnlaQzF3YjJ4cFkza3RkbUZzYVdSaGRHOXlMbXhwCmJtdGxjbVF1YzNaak1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQXdGODhwM21uNllTSTZ6cTYwN1luQVdRVWMKNDJ1Z1dURnYwdXlQM1B6cDdzS0R4VFRUazRhL3ozTzBkdEFUcGFJQjlPT0EyeUtOS3N6dmV2MzhuLzlLV2RDYgp2dGw5UjZGWHp3alY4VjJSczg1czFLTTcwSmU5dGZYYzV1SDBPY2JHQ3hucXZqQ1I3a2d5Q2VraGFUWlFNdFZwCnU5RlRKaTVBWEJCZ3NwYlEySm1tbjhHdDZDODNEUXpNbEJHZkgxSFBNbnI1UmdtVjFQeEMwbXVpNG83eVdlay8KcU8rM3RPS2lVRC9mRkhYMWZYQWVsS3ltTjVuRjYrQk41LzdCaWVFaWh2dEpxK2FDN1dYT3BZUmpaaWNWS2VKSgphenRyMlZQMzlZSmpGb2FlalJQSEJFRjFWa0xrMHBNamZIY2FFNEd5SG9YTHpuSUJpeEFKaGxtMjNKTE0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
-  failurePolicy: Ignore
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJsRENDQVRxZ0F3SUJBZ0lSQU9nSzRZTG5vL0l6dVNmNXhDQk0vOUV3Q2dZSUtvWkl6ajBFQXdJd0tERW0KTUNRR0ExVUVBeE1kZDJWaWFHOXZheTVzYVc1clpYSmtMbU5zZFhOMFpYSXViRzlqWVd3d0hoY05NakV4TVRBMwpNREExTVRNeldoY05NekV4TVRBMU1EQTFNVE16V2pBb01TWXdKQVlEVlFRREV4MTNaV0pvYjI5ckxteHBibXRsCmNtUXVZMngxYzNSbGNpNXNiMk5oYkRCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpsUS9nUjkKR2lWNC9ScldHL1F5OUpSTktOYVYxK2l2QUJyUkJQVjN5VFp0cFNoOWo2b3NDRWgvZDAvVmJCTHhQd1QwSmtVRQpWOU9DeUdVNjF0ZWhPeXlqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lCQmpBU0JnTlZIUk1CQWY4RUNEQUdBUUgvCkFnRUJNQjBHQTFVZERnUVdCQlN5NzAyVXlCcEhyblBJbzduTENCUUF4V0pqL2pBS0JnZ3Foa2pPUFFRREFnTkkKQURCRkFpRUF3c3VHbG9sVmcwOFNqT2JzbUlnbnUvWGZ4RlNJbSt4ZDlKK0diTmN5L0ZjQ0lIWkJ3KzFuNnlSdQorU01TVlpZanJiVUo1SU1WSXYwclFOY08xVUhsR3RrZgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t
+  failurePolicy: Fail
   admissionReviewVersions: ["v1", "v1beta1"]
   rules:
   - operations: ["CREATE", "UPDATE"]
@@ -1156,8 +1142,8 @@ webhooks:
       name: linkerd-proxy-injector
       namespace: linkerd
       path: "/"
-    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJrakNDQVRtZ0F3SUJBZ0lRZDZ6Q3lac2o1WktGcUZ0K0ZpMFl4REFLQmdncWhrak9QUVFEQWpBb01TWXcKSkFZRFZRUURFeDEzWldKb2IyOXJMbXhwYm10bGNtUXVZMngxYzNSbGNpNXNiMk5oYkRBZUZ3MHlNREV5TURReQpNREExTkROYUZ3MHpNREV5TURJeU1EQTFORE5hTUNneEpqQWtCZ05WQkFNVEhYZGxZbWh2YjJzdWJHbHVhMlZ5ClpDNWpiSFZ6ZEdWeUxteHZZMkZzTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFS0pzQldkUUsKU2l0UEhWd2U0Y1RWSVliR3FUMFhDVmFybmtOTU5Va3FxSDd5bHAvK3c1LzlLTmRHTURiMUczeE5HNWZHeGxkMQpKWGRMTkhjNTJ3d3JDNk5GTUVNd0RnWURWUjBQQVFIL0JBUURBZ0VHTUJJR0ExVWRFd0VCL3dRSU1BWUJBZjhDCkFRRXdIUVlEVlIwT0JCWUVGSmxyRXdtS2pPQ25UelE1T3hQOHF0VXFqNm4rTUFvR0NDcUdTTTQ5QkFNQ0EwY0EKTUVRQ0lHRDZCY2trNm1HdXRLblpGTXFycmFlZ1MwWHVReERzcW5QZ1lTZEJnK3NWQWlCWXZiSnU2SHllcWoyYwo0NStQQkRGcExqbnZ0cWQzbCswWU90OEgxdU9Vdnc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t
-  failurePolicy: Ignore
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJsRENDQVRxZ0F3SUJBZ0lSQU9nSzRZTG5vL0l6dVNmNXhDQk0vOUV3Q2dZSUtvWkl6ajBFQXdJd0tERW0KTUNRR0ExVUVBeE1kZDJWaWFHOXZheTVzYVc1clpYSmtMbU5zZFhOMFpYSXViRzlqWVd3d0hoY05NakV4TVRBMwpNREExTVRNeldoY05NekV4TVRBMU1EQTFNVE16V2pBb01TWXdKQVlEVlFRREV4MTNaV0pvYjI5ckxteHBibXRsCmNtUXVZMngxYzNSbGNpNXNiMk5oYkRCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpsUS9nUjkKR2lWNC9ScldHL1F5OUpSTktOYVYxK2l2QUJyUkJQVjN5VFp0cFNoOWo2b3NDRWgvZDAvVmJCTHhQd1QwSmtVRQpWOU9DeUdVNjF0ZWhPeXlqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lCQmpBU0JnTlZIUk1CQWY4RUNEQUdBUUgvCkFnRUJNQjBHQTFVZERnUVdCQlN5NzAyVXlCcEhyblBJbzduTENCUUF4V0pqL2pBS0JnZ3Foa2pPUFFRREFnTkkKQURCRkFpRUF3c3VHbG9sVmcwOFNqT2JzbUlnbnUvWGZ4RlNJbSt4ZDlKK0diTmN5L0ZjQ0lIWkJ3KzFuNnlSdQorU01TVlpZanJiVUo1SU1WSXYwclFOY08xVUhsR3RrZgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t
+  failurePolicy: Fail
   admissionReviewVersions: ["v1", "v1beta1"]
   rules:
   - operations: [ "CREATE" ]
@@ -1196,13 +1182,25 @@ data:
         pullPolicy: ""
         version: stable-2.11.1
     destinationProxyResources: null
-    destinationResources: null
+    destinationResources:
+      cpu:
+        limit: ""
+        request: 100m
+      memory:
+        limit: 250Mi
+        request: 50Mi
     disableHeartBeat: false
     enableEndpointSlices: false
     enableH2Upgrade: true
-    enablePodAntiAffinity: false
+    enablePodAntiAffinity: true
     grafanaUrl: ""
-    heartbeatResources: null
+    heartbeatResources:
+      cpu:
+        limit: ""
+        request: 100m
+      memory:
+        limit: 250Mi
+        request: 50Mi
     heartbeatSchedule: ""
     highAvailability: true
     identity:
@@ -1214,7 +1212,13 @@ data:
         tls:
           crtPEM: ""
     identityProxyResources: null
-    identityResources: null
+    identityResources:
+      cpu:
+        limit: ""
+        request: 100m
+      memory:
+        limit: 250Mi
+        request: 10Mi
     identityTrustAnchorsPEM: |
       -----BEGIN CERTIFICATE-----
       MIIBjTCCATOgAwIBAgIQQA2X2+HETw2JllTX7t0j4jAKBggqhkjOPQQDAjAlMSMw
@@ -1229,7 +1233,7 @@ data:
       -----END CERTIFICATE-----
     identityTrustDomain: cluster.local
     imagePullPolicy: IfNotPresent
-    imagePullSecrets: []
+    imagePullSecrets: null
     installNamespace: true
     linkerdVersion: stable-2.11.1
     namespace: linkerd
@@ -1252,9 +1256,20 @@ data:
           limit: ""
           request: ""
     policyValidator:
-      caBundle: ""
+      caBundle: |-
+        -----BEGIN CERTIFICATE-----
+        MIIBlDCCATqgAwIBAgIRAOgK4YLno/IzuSf5xCBM/9EwCgYIKoZIzj0EAwIwKDEm
+        MCQGA1UEAxMdd2ViaG9vay5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjExMTA3
+        MDA1MTMzWhcNMzExMTA1MDA1MTMzWjAoMSYwJAYDVQQDEx13ZWJob29rLmxpbmtl
+        cmQuY2x1c3Rlci5sb2NhbDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJlQ/gR9
+        GiV4/RrWG/Qy9JRNKNaV1+ivABrRBPV3yTZtpSh9j6osCEh/d0/VbBLxPwT0JkUE
+        V9OCyGU61tehOyyjRTBDMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/
+        AgEBMB0GA1UdDgQWBBSy702UyBpHrnPIo7nLCBQAxWJj/jAKBggqhkjOPQQDAgNI
+        ADBFAiEAwsuGlolVg08SjObsmIgnu/XfxFSIm+xd9J+GbNcy/FcCIHZBw+1n6yRu
+        +SMSVZYjrbUJ5IMVIv0rQNcO1UHlGtkf
+        -----END CERTIFICATE-----
       crtPEM: ""
-      externalSecret: false
+      externalSecret: true
       keyPEM: ""
       namespaceSelector:
         matchExpressions:
@@ -1263,7 +1278,7 @@ data:
           values:
           - disabled
     profileValidator:
-      caBundle: |
+      caBundle: |-
         -----BEGIN CERTIFICATE-----
         MIIBlDCCATqgAwIBAgIRAOgK4YLno/IzuSf5xCBM/9EwCgYIKoZIzj0EAwIwKDEm
         MCQGA1UEAxMdd2ViaG9vay5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjExMTA3
@@ -1341,7 +1356,7 @@ data:
         name: linkerd-proxy-init-xtables-lock
         readOnly: false
     proxyInjector:
-      caBundle: |
+      caBundle: |-
         -----BEGIN CERTIFICATE-----
         MIIBlDCCATqgAwIBAgIRAOgK4YLno/IzuSf5xCBM/9EwCgYIKoZIzj0EAwIwKDEm
         MCQGA1UEAxMdd2ViaG9vay5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjExMTA3
@@ -1362,9 +1377,15 @@ data:
           values:
           - disabled
     proxyInjectorProxyResources: null
-    proxyInjectorResources: null
+    proxyInjectorResources:
+      cpu:
+        limit: ""
+        request: 100m
+      memory:
+        limit: 250Mi
+        request: 50Mi
     tolerations: null
-    webhookFailurePolicy: Ignore
+    webhookFailurePolicy: Fail
 ---
 ###
 ### Identity Controller Service
@@ -1384,15 +1405,15 @@ metadata:
 data:
   ca-bundle.crt: |
     -----BEGIN CERTIFICATE-----
-    MIIBlTCCATugAwIBAgIQHO1zcHw9wGxduMDzqO6IfjAKBggqhkjOPQQDAjApMScw
-    JQYDVQQDEx5pZGVudGl0eS5saW5rZXJkLmNsdXN0ZXIubG9jYWwwHhcNMjAxMjA0
-    MjAxMjU3WhcNMzAxMjAyMjAxMjU3WjApMScwJQYDVQQDEx5pZGVudGl0eS5saW5r
-    ZXJkLmNsdXN0ZXIubG9jYWwwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR0n2vX
-    I0JmmNaordzKAs15Sp5E51HQFLDtmO2oeyTRhLzXB1KD9JWkILGGn/ZNQfDbRilb
-    YJ5C34zh0vFTd+qZo0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB
-    /wIBATAdBgNVHQ4EFgQUMxtjYshOMvCZqc7ROPAXJrPgrhswCgYIKoZIzj0EAwID
-    SAAwRQIgeyoyrNcCxnhFXMJDJlqhnvVTlaVZYlg+O8pQmjWodK0CIQDr25x4H2/R
-    1Cn/CPR/QpR39IDcoLDPOwquScflaX6xrw==
+    MIIBjTCCATOgAwIBAgIQQA2X2+HETw2JllTX7t0j4jAKBggqhkjOPQQDAjAlMSMw
+    IQYDVQQDExpyb290LmxpbmtlcmQuY2x1c3Rlci5sb2NhbDAeFw0yMTExMDcwMTMy
+    MzZaFw0zMTExMDUwMTMyMzZaMCUxIzAhBgNVBAMTGnJvb3QubGlua2VyZC5jbHVz
+    dGVyLmxvY2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEovy9QO5h1u30oFhp
+    VOX3tX17XaEvuTt/3WBBmqI2MxY+t7+Sbd98aLT6kwnG/X9AEtiSPHAyBt93P5Yd
+    YS2l6aNFMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYD
+    VR0OBBYEFNtGvRei6OevANN52LjFzOo1Zgr8MAoGCCqGSM49BAMCA0gAMEUCIBEO
+    mVVuuB8zGAzOvttBWQvbDtq/8mO4k3oiGU9dkbDcAiEA8avWmF1bqmKEccrY9NpC
+    MhtX180RyF5oj5+SkchasKs=
     -----END CERTIFICATE-----
 ---
 kind: Service
@@ -1433,6 +1454,22 @@ spec:
     port: 8080
     targetPort: 8080
 ---
+kind: PodDisruptionBudget
+apiVersion: policy/v1beta1
+metadata:
+  name: linkerd-identity
+  namespace: linkerd
+  labels:
+    linkerd.io/control-plane-component: identity
+    linkerd.io/control-plane-ns: linkerd
+  annotations:
+    linkerd.io/created-by: linkerd/cli stable-2.11.1
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      linkerd.io/control-plane-component: identity
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1453,6 +1490,9 @@ spec:
       linkerd.io/control-plane-component: identity
       linkerd.io/control-plane-ns: linkerd
       linkerd.io/proxy-deployment: linkerd-identity
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
   template:
     metadata:
       annotations:
@@ -1468,6 +1508,26 @@ spec:
     spec:
       nodeSelector:
         beta.kubernetes.io/os: linux
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: linkerd.io/control-plane-component
+                  operator: In
+                  values:
+                  - identity
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: linkerd.io/control-plane-component
+                operator: In
+                values:
+                - identity
+            topologyKey: kubernetes.io/hostname
       containers:
       - args:
         - identity
@@ -1499,6 +1559,12 @@ spec:
           httpGet:
             path: /ready
             port: 9990
+        resources:
+          limits:
+            memory: "250Mi"
+          requests:
+            cpu: "100m"
+            memory: "10Mi"
         securityContext:
           runAsUser: 2103
         volumeMounts:
@@ -1773,6 +1839,22 @@ spec:
     port: 443
     targetPort: policy-https
 ---
+kind: PodDisruptionBudget
+apiVersion: policy/v1beta1
+metadata:
+  name: linkerd-dst
+  namespace: linkerd
+  labels:
+    linkerd.io/control-plane-component: destination
+    linkerd.io/control-plane-ns: linkerd
+  annotations:
+    linkerd.io/created-by: linkerd/cli stable-2.11.1
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      linkerd.io/control-plane-component: destination
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -1793,10 +1875,13 @@ spec:
       linkerd.io/control-plane-component: destination
       linkerd.io/control-plane-ns: linkerd
       linkerd.io/proxy-deployment: linkerd-destination
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
   template:
     metadata:
       annotations:
-        checksum/config: d929495d05723d7e60e1d9f64507adfe3c8f8133a13a19699086dd07d9eeb007
+        checksum/config: 2be56dad810fc7a1ca04a3c35de4e651004fe8b599bd1353ef43a59b1269a1c5
         linkerd.io/created-by: linkerd/cli stable-2.11.1
         linkerd.io/identity-mode: default
         linkerd.io/proxy-version: stable-2.11.1
@@ -1809,6 +1894,26 @@ spec:
     spec:
       nodeSelector:
         beta.kubernetes.io/os: linux
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: linkerd.io/control-plane-component
+                  operator: In
+                  values:
+                  - destination
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: linkerd.io/control-plane-component
+                operator: In
+                values:
+                - destination
+            topologyKey: kubernetes.io/hostname
       containers:
       - env:
         - name: _pod_name
@@ -1961,6 +2066,12 @@ spec:
           httpGet:
             path: /ready
             port: 9996
+        resources:
+          limits:
+            memory: "250Mi"
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
         securityContext:
           runAsUser: 2103
       - args:
@@ -2095,7 +2206,7 @@ metadata:
     linkerd.io/created-by: linkerd/cli stable-2.11.1
 spec:
   concurrencyPolicy: Replace
-  schedule: "25 20 * * *"
+  schedule: "15 07 * * *"
   successfulJobsHistoryLimit: 0
   jobTemplate:
     spec:
@@ -2124,6 +2235,12 @@ spec:
             - "-log-level=info"
             - "-log-format=plain"
             - "-prometheus-url=http://prometheus.linkerd-viz.svc.cluster.local:9090"
+            resources:
+              limits:
+                memory: "250Mi"
+              requests:
+                cpu: "100m"
+                memory: "50Mi"
             securityContext:
               runAsUser: 2103
 ---
@@ -2148,10 +2265,13 @@ spec:
   selector:
     matchLabels:
       linkerd.io/control-plane-component: proxy-injector
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
   template:
     metadata:
       annotations:
-        checksum/config: f198958f5e18a076732e702c43b22ed9268d90e755e8aff898de180cd8c3a106
+        checksum/config: b9747950f1f239b762b38ead5cfa0d06612e1357ebcc6a0e1861c964dc4f26c7
         linkerd.io/created-by: linkerd/cli stable-2.11.1
         linkerd.io/identity-mode: default
         linkerd.io/proxy-version: stable-2.11.1
@@ -2165,6 +2285,26 @@ spec:
     spec:
       nodeSelector:
         beta.kubernetes.io/os: linux
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: linkerd.io/control-plane-component
+                  operator: In
+                  values:
+                  - proxy-injector
+              topologyKey: failure-domain.beta.kubernetes.io/zone
+            weight: 100
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: linkerd.io/control-plane-component
+                operator: In
+                values:
+                - proxy-injector
+            topologyKey: kubernetes.io/hostname
       containers:
       - env:
         - name: _pod_name
@@ -2310,6 +2450,12 @@ spec:
           httpGet:
             path: /ready
             port: 9995
+        resources:
+          limits:
+            memory: "250Mi"
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
         securityContext:
           runAsUser: 2103
         volumeMounts:
@@ -2393,9 +2539,25 @@ spec:
     port: 443
     targetPort: proxy-injector
 ---
+kind: PodDisruptionBudget
+apiVersion: policy/v1beta1
+metadata:
+  name: linkerd-proxy-injector
+  namespace: linkerd
+  labels:
+    linkerd.io/control-plane-component: proxy-injector
+    linkerd.io/control-plane-ns: linkerd
+  annotations:
+    linkerd.io/created-by: linkerd/cli stable-2.11.1
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      linkerd.io/control-plane-component: proxy-injector
+---
 apiVersion: v1
 data:
-  linkerd-config-overrides: Y29udHJvbGxlclJlcGxpY2FzOiAzCmhpZ2hBdmFpbGFiaWxpdHk6IHRydWUKaWRlbnRpdHk6CiAgaXNzdWVyOgogICAgc2NoZW1lOiBrdWJlcm5ldGVzLmlvL3RscwppZGVudGl0eVRydXN0QW5jaG9yc1BFTTogfAogIC0tLS0tQkVHSU4gQ0VSVElGSUNBVEUtLS0tLQogIE1JSUJsVENDQVR1Z0F3SUJBZ0lRSE8xemNIdzl3R3hkdU1EenFPNklmakFLQmdncWhrak9QUVFEQWpBcE1TY3cKICBKUVlEVlFRREV4NXBaR1Z1ZEdsMGVTNXNhVzVyWlhKa0xtTnNkWE4wWlhJdWJHOWpZV3d3SGhjTk1qQXhNakEwCiAgTWpBeE1qVTNXaGNOTXpBeE1qQXlNakF4TWpVM1dqQXBNU2N3SlFZRFZRUURFeDVwWkdWdWRHbDBlUzVzYVc1cgogIFpYSmtMbU5zZFhOMFpYSXViRzlqWVd3d1dUQVRCZ2NxaGtqT1BRSUJCZ2dxaGtqT1BRTUJCd05DQUFSMG4ydlgKICBJMEptbU5hb3JkektBczE1U3A1RTUxSFFGTER0bU8yb2V5VFJoTHpYQjFLRDlKV2tJTEdHbi9aTlFmRGJSaWxiCiAgWUo1QzM0emgwdkZUZCtxWm8wVXdRekFPQmdOVkhROEJBZjhFQkFNQ0FRWXdFZ1lEVlIwVEFRSC9CQWd3QmdFQgogIC93SUJBVEFkQmdOVkhRNEVGZ1FVTXh0allzaE9NdkNacWM3Uk9QQVhKclBncmhzd0NnWUlLb1pJemowRUF3SUQKICBTQUF3UlFJZ2V5b3lyTmNDeG5oRlhNSkRKbHFobnZWVGxhVlpZbGcrTzhwUW1qV29kSzBDSVFEcjI1eDRIMi9SCiAgMUNuL0NQUi9RcFIzOUlEY29MRFBPd3F1U2NmbGFYNnhydz09CiAgLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQpwcm9maWxlVmFsaWRhdG9yOgogIGNhQnVuZGxlOiB8CiAgICAtLS0tLUJFR0lOIENFUlRJRklDQVRFLS0tLS0KICAgIE1JSUJrakNDQVRtZ0F3SUJBZ0lRZDZ6Q3lac2o1WktGcUZ0K0ZpMFl4REFLQmdncWhrak9QUVFEQWpBb01TWXcKICAgIEpBWURWUVFERXgxM1pXSm9iMjlyTG14cGJtdGxjbVF1WTJ4MWMzUmxjaTVzYjJOaGJEQWVGdzB5TURFeU1EUXkKICAgIE1EQTFORE5hRncwek1ERXlNREl5TURBMU5ETmFNQ2d4SmpBa0JnTlZCQU1USFhkbFltaHZiMnN1YkdsdWEyVnkKICAgIFpDNWpiSFZ6ZEdWeUxteHZZMkZzTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFS0pzQldkUUsKICAgIFNpdFBIVndlNGNUVklZYkdxVDBYQ1Zhcm5rTk1OVWtxcUg3eWxwLyt3NS85S05kR01EYjFHM3hORzVmR3hsZDEKICAgIEpYZExOSGM1Mnd3ckM2TkZNRU13RGdZRFZSMFBBUUgvQkFRREFnRUdNQklHQTFVZEV3RUIvd1FJTUFZQkFmOEMKICAgIEFRRXdIUVlEVlIwT0JCWUVGSmxyRXdtS2pPQ25UelE1T3hQOHF0VXFqNm4rTUFvR0NDcUdTTTQ5QkFNQ0EwY0EKICAgIE1FUUNJR0Q2QmNrazZtR3V0S25aRk1xcnJhZWdTMFh1UXhEc3FuUGdZU2RCZytzVkFpQll2Ykp1Nkh5ZXFqMmMKICAgIDQ1K1BCREZwTGpudnRxZDNsKzBZT3Q4SDF1T1V2dz09CiAgICAtLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCiAgZXh0ZXJuYWxTZWNyZXQ6IHRydWUKcHJveHk6CiAgcmVzb3VyY2VzOgogICAgY3B1OgogICAgICByZXF1ZXN0OiAxMDBtCiAgICBtZW1vcnk6CiAgICAgIGxpbWl0OiAyNTBNaQogICAgICByZXF1ZXN0OiAyME1pCnByb3h5SW5qZWN0b3I6CiAgY2FCdW5kbGU6IHwKICAgIC0tLS0tQkVHSU4gQ0VSVElGSUNBVEUtLS0tLQogICAgTUlJQmtqQ0NBVG1nQXdJQkFnSVFkNnpDeVpzajVaS0ZxRnQrRmkwWXhEQUtCZ2dxaGtqT1BRUURBakFvTVNZdwogICAgSkFZRFZRUURFeDEzWldKb2IyOXJMbXhwYm10bGNtUXVZMngxYzNSbGNpNXNiMk5oYkRBZUZ3MHlNREV5TURReQogICAgTURBMU5ETmFGdzB6TURFeU1ESXlNREExTkROYU1DZ3hKakFrQmdOVkJBTVRIWGRsWW1odmIyc3ViR2x1YTJWeQogICAgWkM1amJIVnpkR1Z5TG14dlkyRnNNRmt3RXdZSEtvWkl6ajBDQVFZSUtvWkl6ajBEQVFjRFFnQUVLSnNCV2RRSwogICAgU2l0UEhWd2U0Y1RWSVliR3FUMFhDVmFybmtOTU5Va3FxSDd5bHAvK3c1LzlLTmRHTURiMUczeE5HNWZHeGxkMQogICAgSlhkTE5IYzUyd3dyQzZORk1FTXdEZ1lEVlIwUEFRSC9CQVFEQWdFR01CSUdBMVVkRXdFQi93UUlNQVlCQWY4QwogICAgQVFFd0hRWURWUjBPQkJZRUZKbHJFd21Lak9DblR6UTVPeFA4cXRVcWo2bitNQW9HQ0NxR1NNNDlCQU1DQTBjQQogICAgTUVRQ0lHRDZCY2trNm1HdXRLblpGTXFycmFlZ1MwWHVReERzcW5QZ1lTZEJnK3NWQWlCWXZiSnU2SHllcWoyYwogICAgNDUrUEJERnBMam52dHFkM2wrMFlPdDhIMXVPVXZ3PT0KICAgIC0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KICBleHRlcm5hbFNlY3JldDogdHJ1ZQo=
+  linkerd-config-overrides: Y29udHJvbGxlclJlcGxpY2FzOiAzCmRlc3RpbmF0aW9uUmVzb3VyY2VzOgogIGNwdToKICAgIGxpbWl0OiAiIgogICAgcmVxdWVzdDogMTAwbQogIG1lbW9yeToKICAgIGxpbWl0OiAyNTBNaQogICAgcmVxdWVzdDogNTBNaQplbmFibGVQb2RBbnRpQWZmaW5pdHk6IHRydWUKaGVhcnRiZWF0UmVzb3VyY2VzOgogIGNwdToKICAgIGxpbWl0OiAiIgogICAgcmVxdWVzdDogMTAwbQogIG1lbW9yeToKICAgIGxpbWl0OiAyNTBNaQogICAgcmVxdWVzdDogNTBNaQpoaWdoQXZhaWxhYmlsaXR5OiB0cnVlCmlkZW50aXR5OgogIGlzc3VlcjoKICAgIHNjaGVtZToga3ViZXJuZXRlcy5pby90bHMKaWRlbnRpdHlSZXNvdXJjZXM6CiAgY3B1OgogICAgbGltaXQ6ICIiCiAgICByZXF1ZXN0OiAxMDBtCiAgbWVtb3J5OgogICAgbGltaXQ6IDI1ME1pCiAgICByZXF1ZXN0OiAxME1pCmlkZW50aXR5VHJ1c3RBbmNob3JzUEVNOiB8CiAgLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCiAgTUlJQmpUQ0NBVE9nQXdJQkFnSVFRQTJYMitIRVR3MkpsbFRYN3QwajRqQUtCZ2dxaGtqT1BRUURBakFsTVNNdwogIElRWURWUVFERXhweWIyOTBMbXhwYm10bGNtUXVZMngxYzNSbGNpNXNiMk5oYkRBZUZ3MHlNVEV4TURjd01UTXkKICBNelphRncwek1URXhNRFV3TVRNeU16WmFNQ1V4SXpBaEJnTlZCQU1UR25KdmIzUXViR2x1YTJWeVpDNWpiSFZ6CiAgZEdWeUxteHZZMkZzTUZrd0V3WUhLb1pJemowQ0FRWUlLb1pJemowREFRY0RRZ0FFb3Z5OVFPNWgxdTMwb0ZocAogIFZPWDN0WDE3WGFFdnVUdC8zV0JCbXFJMk14WSt0NytTYmQ5OGFMVDZrd25HL1g5QUV0aVNQSEF5QnQ5M1A1WWQKICBZUzJsNmFORk1FTXdEZ1lEVlIwUEFRSC9CQVFEQWdFR01CSUdBMVVkRXdFQi93UUlNQVlCQWY4Q0FRRXdIUVlECiAgVlIwT0JCWUVGTnRHdlJlaTZPZXZBTk41MkxqRnpPbzFaZ3I4TUFvR0NDcUdTTTQ5QkFNQ0EwZ0FNRVVDSUJFTwogIG1WVnV1Qjh6R0F6T3Z0dEJXUXZiRHRxLzhtTzRrM29pR1U5ZGtiRGNBaUVBOGF2V21GMWJxbUtFY2NyWTlOcEMKICBNaHRYMTgwUnlGNW9qNStTa2NoYXNLcz0KICAtLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCmltYWdlUHVsbFNlY3JldHM6IG51bGwKcG9saWN5VmFsaWRhdG9yOgogIGNhQnVuZGxlOiB8LQogICAgLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCiAgICBNSUlCbERDQ0FUcWdBd0lCQWdJUkFPZ0s0WUxuby9JenVTZjV4Q0JNLzlFd0NnWUlLb1pJemowRUF3SXdLREVtCiAgICBNQ1FHQTFVRUF4TWRkMlZpYUc5dmF5NXNhVzVyWlhKa0xtTnNkWE4wWlhJdWJHOWpZV3d3SGhjTk1qRXhNVEEzCiAgICBNREExTVRNeldoY05NekV4TVRBMU1EQTFNVE16V2pBb01TWXdKQVlEVlFRREV4MTNaV0pvYjI5ckxteHBibXRsCiAgICBjbVF1WTJ4MWMzUmxjaTVzYjJOaGJEQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJKbFEvZ1I5CiAgICBHaVY0L1JyV0cvUXk5SlJOS05hVjEraXZBQnJSQlBWM3lUWnRwU2g5ajZvc0NFaC9kMC9WYkJMeFB3VDBKa1VFCiAgICBWOU9DeUdVNjF0ZWhPeXlqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lCQmpBU0JnTlZIUk1CQWY4RUNEQUdBUUgvCiAgICBBZ0VCTUIwR0ExVWREZ1FXQkJTeTcwMlV5QnBIcm5QSW83bkxDQlFBeFdKai9qQUtCZ2dxaGtqT1BRUURBZ05JCiAgICBBREJGQWlFQXdzdUdsb2xWZzA4U2pPYnNtSWdudS9YZnhGU0ltK3hkOUorR2JOY3kvRmNDSUhaQncrMW42eVJ1CiAgICArU01TVlpZanJiVUo1SU1WSXYwclFOY08xVUhsR3RrZgogICAgLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQogIGV4dGVybmFsU2VjcmV0OiB0cnVlCnByb2ZpbGVWYWxpZGF0b3I6CiAgY2FCdW5kbGU6IHwtCiAgICAtLS0tLUJFR0lOIENFUlRJRklDQVRFLS0tLS0KICAgIE1JSUJsRENDQVRxZ0F3SUJBZ0lSQU9nSzRZTG5vL0l6dVNmNXhDQk0vOUV3Q2dZSUtvWkl6ajBFQXdJd0tERW0KICAgIE1DUUdBMVVFQXhNZGQyVmlhRzl2YXk1c2FXNXJaWEprTG1Oc2RYTjBaWEl1Ykc5allXd3dIaGNOTWpFeE1UQTMKICAgIE1EQTFNVE16V2hjTk16RXhNVEExTURBMU1UTXpXakFvTVNZd0pBWURWUVFERXgxM1pXSm9iMjlyTG14cGJtdGwKICAgIGNtUXVZMngxYzNSbGNpNXNiMk5oYkRCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpsUS9nUjkKICAgIEdpVjQvUnJXRy9ReTlKUk5LTmFWMStpdkFCclJCUFYzeVRadHBTaDlqNm9zQ0VoL2QwL1ZiQkx4UHdUMEprVUUKICAgIFY5T0N5R1U2MXRlaE95eWpSVEJETUE0R0ExVWREd0VCL3dRRUF3SUJCakFTQmdOVkhSTUJBZjhFQ0RBR0FRSC8KICAgIEFnRUJNQjBHQTFVZERnUVdCQlN5NzAyVXlCcEhyblBJbzduTENCUUF4V0pqL2pBS0JnZ3Foa2pPUFFRREFnTkkKICAgIEFEQkZBaUVBd3N1R2xvbFZnMDhTak9ic21JZ251L1hmeEZTSW0reGQ5SitHYk5jeS9GY0NJSFpCdysxbjZ5UnUKICAgICtTTVNWWllqcmJVSjVJTVZJdjByUU5jTzFVSGxHdGtmCiAgICAtLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCiAgZXh0ZXJuYWxTZWNyZXQ6IHRydWUKcHJveHk6CiAgcmVzb3VyY2VzOgogICAgY3B1OgogICAgICByZXF1ZXN0OiAxMDBtCiAgICBtZW1vcnk6CiAgICAgIGxpbWl0OiAyNTBNaQogICAgICByZXF1ZXN0OiAyME1pCnByb3h5SW5qZWN0b3I6CiAgY2FCdW5kbGU6IHwtCiAgICAtLS0tLUJFR0lOIENFUlRJRklDQVRFLS0tLS0KICAgIE1JSUJsRENDQVRxZ0F3SUJBZ0lSQU9nSzRZTG5vL0l6dVNmNXhDQk0vOUV3Q2dZSUtvWkl6ajBFQXdJd0tERW0KICAgIE1DUUdBMVVFQXhNZGQyVmlhRzl2YXk1c2FXNXJaWEprTG1Oc2RYTjBaWEl1Ykc5allXd3dIaGNOTWpFeE1UQTMKICAgIE1EQTFNVE16V2hjTk16RXhNVEExTURBMU1UTXpXakFvTVNZd0pBWURWUVFERXgxM1pXSm9iMjlyTG14cGJtdGwKICAgIGNtUXVZMngxYzNSbGNpNXNiMk5oYkRCWk1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhBMElBQkpsUS9nUjkKICAgIEdpVjQvUnJXRy9ReTlKUk5LTmFWMStpdkFCclJCUFYzeVRadHBTaDlqNm9zQ0VoL2QwL1ZiQkx4UHdUMEprVUUKICAgIFY5T0N5R1U2MXRlaE95eWpSVEJETUE0R0ExVWREd0VCL3dRRUF3SUJCakFTQmdOVkhSTUJBZjhFQ0RBR0FRSC8KICAgIEFnRUJNQjBHQTFVZERnUVdCQlN5NzAyVXlCcEhyblBJbzduTENCUUF4V0pqL2pBS0JnZ3Foa2pPUFFRREFnTkkKICAgIEFEQkZBaUVBd3N1R2xvbFZnMDhTak9ic21JZ251L1hmeEZTSW0reGQ5SitHYk5jeS9GY0NJSFpCdysxbjZ5UnUKICAgICtTTVNWWllqcmJVSjVJTVZJdjByUU5jTzFVSGxHdGtmCiAgICAtLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCiAgZXh0ZXJuYWxTZWNyZXQ6IHRydWUKcHJveHlJbmplY3RvclJlc291cmNlczoKICBjcHU6CiAgICBsaW1pdDogIiIKICAgIHJlcXVlc3Q6IDEwMG0KICBtZW1vcnk6CiAgICBsaW1pdDogMjUwTWkKICAgIHJlcXVlc3Q6IDUwTWkKd2ViaG9va0ZhaWx1cmVQb2xpY3k6IEZhaWwK
 kind: Secret
 metadata:
   creationTimestamp: null
