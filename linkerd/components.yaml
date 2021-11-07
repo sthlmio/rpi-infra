@@ -1167,7 +1167,7 @@ data:
     cliVersion: linkerd/cli stable-2.11.1
     clusterDomain: cluster.local
     clusterNetworks: 10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16
-    cniEnabled: false
+    cniEnabled: true
     controlPlaneTracing: false
     controlPlaneTracingNamespace: linkerd-jaeger
     controllerImage: cr.l5d.io/linkerd/controller
