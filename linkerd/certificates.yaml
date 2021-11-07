@@ -38,26 +38,6 @@ spec:
   usages:
   - server auth
 ---
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: linkerd-tap
-#   namespace: linkerd
-# spec:
-#   secretName: linkerd-tap-k8s-tls
-#   duration: 24h
-#   renewBefore: 2h
-#   issuerRef:
-#     name: webhook-issuer
-#     kind: Issuer
-#   dnsNames:
-#     - linkerd-tap.linkerd.svc
-#   isCA: false
-#   privateKey:
-#     algorithm: ECDSA
-#   usages:
-#   - server auth
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
