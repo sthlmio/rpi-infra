@@ -37,7 +37,7 @@ kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-passwor
 http://127.0.0.1:9090
 
 ```bash
-kubectl port-forward deploy/prometheus-server -n monitoring 9090:9090
+kubectl port-forward statefulset/prometheus-server -n monitoring 9090:9090
 ```
 
 ### Grafana

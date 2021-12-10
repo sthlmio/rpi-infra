@@ -5,3 +5,6 @@ resources:
 - ./sealed-secret.yaml
 - ./helm-repository.yaml
 - ./helm-release.yaml
+- ./grafana-dashboard-node-exporter.yaml
+- ./grafana-dashboard-pod.yaml
+- ./grafana-dashboard-kubernetes-cluster.yaml

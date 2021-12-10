@@ -766,6 +766,9 @@ spec:
       type: LoadBalancer
     plugins:
       - grafana-piechart-panel
+    sidecar:
+      dashboards:
+        enabled: true
     datasources:
       datasources.yaml:
         apiVersion: 1
