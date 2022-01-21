@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: openfaas
-      version: 9.0.0
+      version: 9.0.2
       sourceRef:
         kind: HelmRepository
         name: openfaas
@@ -23,39 +23,27 @@ spec:
     basic_auth: true
     clusterRole: true
     createCRDs: true
-    # See https://www.openfaas.com/support for more
     openfaasPRO: false
     gateway:
-      image: openfaas/gateway:0.20.1-arm64
       directFunctions: true
       replicas: 3
     oidcAuthPlugin:
       enabled: false
-    faasnetes:
-      image: ghcr.io/openfaas/faas-netes:0.12.13
     operator:
-      image: ghcr.io/openfaas/faas-netes:0.12.13
       create: true
     queueWorker:
-      image: openfaas/queue-worker:0.11.2
       replicas: 3
     prometheus:
-      image: prom/prometheus:v2.11.0
       resources:
         requests:
           memory: "100Mi"
-    alertmanager:
-      image: prom/alertmanager:v0.18.0
     faasIdler:
       replicas: 1
-      image: ghcr.io/openfaas/faas-idler-pro:0.5.0
     basicAuthPlugin:
-      image: openfaas/basic-auth-plugin:0.20.1-arm64
       replicas: 1
     ingressOperator:
       create: false
-
-    # Unfortunately the exporter is not multi-arch (yet)
     nats:
       metrics:
+        # Should stay off by default because the exporter is not multi-arch (yet)
         enabled: false
