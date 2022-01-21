@@ -14,8 +14,6 @@ linkerd install \
   --set-file profileValidator.caBundle=ca.crt \
   > components.yaml
 
-linkerd install-cni > cni.yaml
-
 linkerd upgrade > components.yaml
 
 ```
