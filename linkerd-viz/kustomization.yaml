@@ -5,4 +5,4 @@ resources:
 - ./certificates.yaml
 - ./webhook-issuer-tls.yaml
 - ./issuers.yaml
-# - ./components.yaml
+- ./components.yaml
