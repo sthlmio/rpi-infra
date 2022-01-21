@@ -28,9 +28,9 @@ spec:
       - --entryPoints.metrics.address=:8082
     deployment:
       replicas: 3
-      # podAnnotations:
-        # linkerd.io/inject: ingress
-        # config.linkerd.io/opaque-ports: 8443,8000
+      podAnnotations:
+        linkerd.io/inject: ingress
+        config.linkerd.io/opaque-ports: 8443,8000
     logs:
       access:
         enabled: true
@@ -51,10 +51,3 @@ spec:
               matchLabels:
                   app.kubernetes.io/instance: traefik
             topologyKey: kubernetes.io/hostname
-        # preferredDuringSchedulingIgnoredDuringExecution:
-        #   - weight: 100
-        #     podAffinityTerm:
-        #       topologyKey: kubernetes.io/hostname
-        #       labelSelector:
-        #         matchLabels:
-        #           app.kubernetes.io/instance: traefik
