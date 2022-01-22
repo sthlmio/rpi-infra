@@ -18,7 +18,7 @@ kubectl port-forward statefulset/prometheus-server -n monitoring 9090:9090
 
 ### Grafana
 
-http://192.168.2.3/
+http://192.168.2.2/
 
 ```bash
 kubectl get secret --namespace monitoring grafana-credentials -o jsonpath="{.data.admin-user}" | base64 --decode ; echo
@@ -27,10 +27,6 @@ kubectl get secret --namespace monitoring grafana-credentials -o jsonpath="{.dat
 kubectl get secret --namespace monitoring grafana-credentials -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 ```
-
-### Longhorn
-
-http://192.168.2.2/
 
 ## Create a sealed secret
 
