@@ -28,9 +28,9 @@ spec:
       - --entryPoints.metrics.address=:8082
     deployment:
       replicas: 3
-      # podAnnotations:
-      #   linkerd.io/inject: ingress
-      #   config.linkerd.io/skip-outbound-ports: 443
+      podAnnotations:
+        linkerd.io/inject: ingress
+        config.linkerd.io/skip-outbound-ports: "443,6443"
     logs:
       access:
         enabled: true
