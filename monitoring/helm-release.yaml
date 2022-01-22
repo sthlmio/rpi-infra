@@ -36,6 +36,7 @@ spec:
       statefulSet:
         enabled: true
       persistentVolume:
+        enabled: false
         storageClass: local-path
     extraScrapeConfigs: |
       - job_name: etcd
