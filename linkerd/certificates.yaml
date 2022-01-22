@@ -45,8 +45,10 @@ metadata:
   namespace: linkerd
 spec:
   secretName: linkerd-policy-validator-k8s-tls
-  duration: 24h
-  renewBefore: 2h
+  # Setting higher duration here due to issue:
+  # https://github.com/linkerd/linkerd2/issues/7519
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
   issuerRef:
     name: webhook-issuer
     kind: Issuer
