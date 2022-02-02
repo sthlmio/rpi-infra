@@ -5171,7 +5171,7 @@ spec:
         prometheus.io/port: "8002"
         prometheus.io/path: "/stats/prometheus"
         linkerd.io/inject: ingress
-        config.linkerd.io/skip-outbound-ports: 8001
+        config.linkerd.io/skip-outbound-ports: "8001"
       labels:
         app: envoy
     spec:
