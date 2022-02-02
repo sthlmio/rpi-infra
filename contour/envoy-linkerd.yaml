@@ -1,0 +1,16 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: envoy
+  name: envoy
+  namespace: projectcontour
+spec:
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: ingress
+        config.linkerd.io/skip-outbound-ports: "8001"
+    spec:
+      automountServiceAccountToken: true
