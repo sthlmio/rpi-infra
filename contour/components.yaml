@@ -5051,7 +5051,7 @@ metadata:
   name: contour
   namespace: projectcontour
 spec:
-  replicas: 2
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
