@@ -5,3 +5,4 @@ resources:
 patchesStrategicMerge:
 - ./envoy-linkerd.yaml
 - ./contour-linkerd.yaml
+- ./configmap.yaml

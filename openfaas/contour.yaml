@@ -1,0 +1,15 @@
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: faas
+  namespace: openfaas
+spec:
+  virtualhost:
+    fqdn: faas.sthlm.io
+    tls:
+      secretName: certificate-secret
+  routes:
+  - services:
+    - name: gateway-external
+      port: 8080
