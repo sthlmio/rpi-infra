@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ./namespace.yaml
 - ./certificate.yaml
-- ./traefik.yaml
 - ./helm-repository.yaml
 - ./helm-release.yaml
+- ./traefik.yaml
+- ./contour.yaml
