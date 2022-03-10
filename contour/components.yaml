@@ -4840,7 +4840,7 @@ rules:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: contour-certgen-v1.20.0
+  name: contour-certgen-v1.20.1
   namespace: projectcontour
 spec:
   template:
@@ -4850,7 +4850,7 @@ spec:
     spec:
       containers:
       - name: contour
-        image: ghcr.io/projectcontour/contour:v1.20.0
+        image: ghcr.io/projectcontour/contour:v1.20.1
         imagePullPolicy: Always
         command:
         - contour
@@ -5040,7 +5040,6 @@ spec:
   selector:
     app: envoy
   type: LoadBalancer
-  loadBalancerIP: 192.168.2.3
 
 ---
 apiVersion: apps/v1
@@ -5051,7 +5050,7 @@ metadata:
   name: contour
   namespace: projectcontour
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -5089,7 +5088,7 @@ spec:
         - --contour-key-file=/certs/tls.key
         - --config-path=/config/contour.yaml
         command: ["contour"]
-        image: ghcr.io/projectcontour/contour:v1.20.0
+        image: ghcr.io/projectcontour/contour:v1.20.1
         imagePullPolicy: IfNotPresent
         name: contour
         ports:
@@ -5178,7 +5177,7 @@ spec:
         args:
           - envoy
           - shutdown-manager
-        image: ghcr.io/projectcontour/contour:v1.20.0
+        image: ghcr.io/projectcontour/contour:v1.20.1
         imagePullPolicy: IfNotPresent
         lifecycle:
           preStop:
@@ -5205,7 +5204,7 @@ spec:
         - --log-level info
         command:
         - envoy
-        image: docker.io/envoyproxy/envoy:v1.21.0
+        image: docker.io/envoyproxy/envoy:v1.21.1
         imagePullPolicy: IfNotPresent
         name: envoy
         env:
@@ -5262,7 +5261,7 @@ spec:
         - --envoy-key-file=/certs/tls.key
         command:
         - contour
-        image: ghcr.io/projectcontour/contour:v1.20.0
+        image: ghcr.io/projectcontour/contour:v1.20.1
         imagePullPolicy: IfNotPresent
         name: envoy-initconfig
         volumeMounts:

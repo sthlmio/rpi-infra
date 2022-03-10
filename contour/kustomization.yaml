@@ -4,5 +4,6 @@ resources:
 - ./components.yaml
 patchesStrategicMerge:
 - ./envoy-linkerd.yaml
-- ./contour-linkerd.yaml
+- ./contour-deployment.yaml
+- ./envoy-service.yaml
 - ./configmap.yaml
