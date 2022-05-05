@@ -52,7 +52,7 @@ spec:
         - name: bgp_routerinterface
           value: "eth0"
         - name: bgp_as
-          value: "64512"
+          value: "65000"
         - name: bgp_peeraddress
           value: 192.168.1.1
         - name: bgp_peerpass
@@ -62,8 +62,8 @@ spec:
           value: "64512"
         - name: address
           value: 192.168.3.1
-        - name : lb_enable
-          value: "true"
+        # - name : lb_enable
+        #   value: "true"
         image: ghcr.io/kube-vip/kube-vip:v0.4.4
         imagePullPolicy: Always
         name: kube-vip
