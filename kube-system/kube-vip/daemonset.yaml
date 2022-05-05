@@ -56,6 +56,8 @@ spec:
         - name: bgp_peeraddress
           value: 192.168.1.1
         - name: bgp_peerpass
+        - name: bgp_sourceif
+          value: "eth0"
         - name: bgp_peeras
           value: "64512"
         - name: address
