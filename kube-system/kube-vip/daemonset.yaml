@@ -32,20 +32,12 @@ spec:
       - args:
         - manager
         env:
-        - name: vip_arp
-          value: "false"
-        - name: port
-          value: "6443"
         - name: vip_interface
           value: "lo"
-        - name: vip_cidr
-          value: "32"
         - name: cp_enable
           value: "true"
         - name: cp_namespace
           value: kube-system
-        - name: vip_ddns
-          value: "false"
         - name: bgp_enable
           value: "true"
         - name: bgp_routerinterface
@@ -54,9 +46,8 @@ spec:
           value: "65000"
         - name: bgp_peeraddress
           value: 192.168.1.1
-        - name: bgp_peerpass
-        - name: bgp_sourceif
-          value: "eth0"
+        - name: bgp_peers
+          value: "192.168.1.1:64512::false"
         - name: bgp_peeras
           value: "64512"
         - name: address
