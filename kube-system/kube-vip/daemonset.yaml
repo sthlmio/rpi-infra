@@ -37,7 +37,7 @@ spec:
         - name: port
           value: "6443"
         - name: vip_interface
-          value: lo
+          value: "lo"
         - name: vip_cidr
           value: "32"
         - name: cp_enable
@@ -48,11 +48,8 @@ spec:
           value: "false"
         - name: bgp_enable
           value: "true"
-        - name: bgp_routerid
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
         - name: bgp_routerinterface
+          value: "ens160"
         - name: bgp_as
           value: "65000"
         - name: bgp_peeraddress
