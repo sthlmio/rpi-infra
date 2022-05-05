@@ -33,7 +33,7 @@ spec:
         - manager
         env:
         - name: vip_interface
-          value: "lo"
+          value: "eth0"
         - name: cp_enable
           value: "true"
         - name: cp_namespace
@@ -43,7 +43,7 @@ spec:
         - name: bgp_routerinterface
           value: "eth0"
         - name: bgp_as
-          value: "65000"
+          value: "64512"
         - name: bgp_peeraddress
           value: 192.168.1.1
         - name: bgp_peeras
