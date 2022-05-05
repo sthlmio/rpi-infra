@@ -49,8 +49,10 @@ spec:
         - name: bgp_enable
           value: "true"
         - name: bgp_routerid
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
         - name: bgp_routerinterface
-          value: lo
         - name: bgp_as
           value: "65000"
         - name: bgp_peeraddress
