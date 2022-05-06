@@ -32,8 +32,6 @@ spec:
       - args:
         - manager
         env:
-        - name: vip_interface
-          value: "eth0"
         - name: cp_enable
           value: "true"
         - name: cp_namespace
