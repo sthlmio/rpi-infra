@@ -278,7 +278,7 @@ kind: CustomResourceDefinition
 metadata:
   name: servers.policy.linkerd.io
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
     helm.sh/chart: linkerd2-0.1.0
     linkerd.io/control-plane-ns: linkerd
@@ -424,8 +424,9 @@ kind: CustomResourceDefinition
 metadata:
   name: serverauthorizations.policy.linkerd.io
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
+    helm.sh/chart: linkerd2-0.1.0
     linkerd.io/control-plane-ns: linkerd
 spec:
   group: policy.linkerd.io
@@ -690,7 +691,7 @@ kind: CustomResourceDefinition
 metadata:
   name: serviceprofiles.linkerd.io
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
     linkerd.io/control-plane-ns: linkerd
 spec:
@@ -968,7 +969,7 @@ kind: CustomResourceDefinition
 metadata:
   name: trafficsplits.split.smi-spec.io
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
     linkerd.io/control-plane-ns: linkerd
 spec:
@@ -1146,17 +1147,17 @@ metadata:
     linkerd.io/control-plane-component: controller
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 data:
   values: |
-    cliVersion: linkerd/cli stable-2.11.2
+    cliVersion: linkerd/cli stable-2.11.4
     clusterDomain: cluster.local
     clusterNetworks: 10.0.0.0/8,100.64.0.0/10,172.16.0.0/12,192.168.0.0/16
     cniEnabled: false
     controlPlaneTracing: false
     controlPlaneTracingNamespace: linkerd-jaeger
     controllerImage: cr.l5d.io/linkerd/controller
-    controllerImageVersion: stable-2.11.2
+    controllerImageVersion: stable-2.11.4
     controllerLogFormat: plain
     controllerLogLevel: info
     controllerReplicas: 3
@@ -1165,7 +1166,7 @@ data:
       image:
         name: cr.l5d.io/linkerd/debug
         pullPolicy: ""
-        version: stable-2.11.2
+        version: stable-2.11.4
     destinationProxyResources: null
     destinationResources:
       cpu:
@@ -1220,7 +1221,7 @@ data:
     imagePullPolicy: IfNotPresent
     imagePullSecrets: null
     installNamespace: true
-    linkerdVersion: stable-2.11.2
+    linkerdVersion: stable-2.11.4
     namespace: linkerd
     nodeSelector:
       kubernetes.io/os: linux
@@ -1255,7 +1256,6 @@ data:
         -----END CERTIFICATE-----
       crtPEM: ""
       externalSecret: true
-      keyPEM: ""
       namespaceSelector:
         matchExpressions:
         - key: config.linkerd.io/admission-webhooks
@@ -1293,7 +1293,7 @@ data:
       image:
         name: cr.l5d.io/linkerd/proxy
         pullPolicy: ""
-        version: stable-2.11.2
+        version: stable-2.11.4
       inboundConnectTimeout: 100ms
       isGateway: false
       isIngress: false
@@ -1390,7 +1390,7 @@ metadata:
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 data:
   ca-bundle.crt: |
     -----BEGIN CERTIFICATE-----
@@ -1414,7 +1414,7 @@ metadata:
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1433,7 +1433,7 @@ metadata:
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   clusterIP: None
   selector:
@@ -1452,7 +1452,7 @@ metadata:
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   maxUnavailable: 1
   selector:
@@ -1463,11 +1463,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
     app.kubernetes.io/name: identity
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     linkerd.io/control-plane-component: identity
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-identity
@@ -1485,9 +1485,9 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/cli stable-2.11.2
+        linkerd.io/created-by: linkerd/cli stable-2.11.4
         linkerd.io/identity-mode: default
-        linkerd.io/proxy-version: stable-2.11.2
+        linkerd.io/proxy-version: stable-2.11.4
         config.linkerd.io/default-inbound-policy: "all-unauthenticated"
       labels:
         linkerd.io/control-plane-component: identity
@@ -1531,7 +1531,7 @@ spec:
         env:
         - name: LINKERD_DISABLED
           value: "linkerd-await cannot block the identity controller"
-        image: cr.l5d.io/linkerd/controller:stable-2.11.2
+        image: cr.l5d.io/linkerd/controller:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1649,7 +1649,7 @@ spec:
           value: linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local
         - name: LINKERD2_PROXY_POLICY_SVC_NAME
           value: linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local
-        image: cr.l5d.io/linkerd/proxy:stable-2.11.2
+        image: cr.l5d.io/linkerd/proxy:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1743,7 +1743,7 @@ metadata:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1762,7 +1762,7 @@ metadata:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   clusterIP: None
   selector:
@@ -1781,7 +1781,7 @@ metadata:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1800,7 +1800,7 @@ metadata:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   clusterIP: None
   selector:
@@ -1819,7 +1819,7 @@ metadata:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1838,7 +1838,7 @@ metadata:
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   maxUnavailable: 1
   selector:
@@ -1849,11 +1849,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
     app.kubernetes.io/name: destination
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     linkerd.io/control-plane-component: destination
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-destination
@@ -1872,9 +1872,9 @@ spec:
     metadata:
       annotations:
         checksum/config: c9b5d23c2474ae192d6337fb5b7596b9d8e9d02bd8e876a4eb9b1fb2023b7940
-        linkerd.io/created-by: linkerd/cli stable-2.11.2
+        linkerd.io/created-by: linkerd/cli stable-2.11.4
         linkerd.io/identity-mode: default
-        linkerd.io/proxy-version: stable-2.11.2
+        linkerd.io/proxy-version: stable-2.11.4
         config.linkerd.io/default-inbound-policy: "all-unauthenticated"
       labels:
         linkerd.io/control-plane-component: destination
@@ -1990,7 +1990,7 @@ spec:
           value: linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local
         - name: LINKERD2_PROXY_POLICY_SVC_NAME
           value: linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local
-        image: cr.l5d.io/linkerd/proxy:stable-2.11.2
+        image: cr.l5d.io/linkerd/proxy:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -2040,7 +2040,7 @@ spec:
         - -identity-trust-domain=cluster.local
         - -default-opaque-ports=25,587,3306,4444,5432,6379,9300,11211
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/controller:stable-2.11.2
+        image: cr.l5d.io/linkerd/controller:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -2071,7 +2071,7 @@ spec:
         - -log-level=info
         - -log-format=plain
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/controller:stable-2.11.2
+        image: cr.l5d.io/linkerd/controller:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -2107,7 +2107,7 @@ spec:
         - --default-policy=all-unauthenticated
         - --log-level=linkerd=info,warn
         - --log-format=plain
-        image: cr.l5d.io/linkerd/policy-controller:stable-2.11.2
+        image: cr.l5d.io/linkerd/policy-controller:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -2195,14 +2195,14 @@ metadata:
   labels:
     app.kubernetes.io/name: heartbeat
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     linkerd.io/control-plane-component: heartbeat
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   concurrencyPolicy: Replace
-  schedule: "08 19 * * *"
+  schedule: "19 18 * * *"
   successfulJobsHistoryLimit: 0
   jobTemplate:
     spec:
@@ -2212,7 +2212,7 @@ spec:
             linkerd.io/control-plane-component: heartbeat
             linkerd.io/workload-ns: linkerd
           annotations:
-            linkerd.io/created-by: linkerd/cli stable-2.11.2
+            linkerd.io/created-by: linkerd/cli stable-2.11.4
         spec:
           nodeSelector:
             kubernetes.io/os: linux
@@ -2220,7 +2220,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: heartbeat
-            image: cr.l5d.io/linkerd/controller:stable-2.11.2
+            image: cr.l5d.io/linkerd/controller:stable-2.11.4
             imagePullPolicy: IfNotPresent
             env:
             - name: LINKERD_DISABLED
@@ -2247,11 +2247,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
   labels:
     app.kubernetes.io/name: proxy-injector
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     linkerd.io/control-plane-component: proxy-injector
     linkerd.io/control-plane-ns: linkerd
   name: linkerd-proxy-injector
@@ -2268,9 +2268,9 @@ spec:
     metadata:
       annotations:
         checksum/config: b9747950f1f239b762b38ead5cfa0d06612e1357ebcc6a0e1861c964dc4f26c7
-        linkerd.io/created-by: linkerd/cli stable-2.11.2
+        linkerd.io/created-by: linkerd/cli stable-2.11.4
         linkerd.io/identity-mode: default
-        linkerd.io/proxy-version: stable-2.11.2
+        linkerd.io/proxy-version: stable-2.11.4
         config.linkerd.io/opaque-ports: "8443"
         config.linkerd.io/default-inbound-policy: "all-unauthenticated"
       labels:
@@ -2387,7 +2387,7 @@ spec:
           value: linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local
         - name: LINKERD2_PROXY_POLICY_SVC_NAME
           value: linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local
-        image: cr.l5d.io/linkerd/proxy:stable-2.11.2
+        image: cr.l5d.io/linkerd/proxy:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -2430,7 +2430,7 @@ spec:
         - -log-level=info
         - -log-format=plain
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/controller:stable-2.11.2
+        image: cr.l5d.io/linkerd/controller:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -2526,7 +2526,7 @@ metadata:
     linkerd.io/control-plane-component: proxy-injector
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
     config.linkerd.io/opaque-ports: "443"
 spec:
   type: ClusterIP
@@ -2546,7 +2546,7 @@ metadata:
     linkerd.io/control-plane-component: proxy-injector
     linkerd.io/control-plane-ns: linkerd
   annotations:
-    linkerd.io/created-by: linkerd/cli stable-2.11.2
+    linkerd.io/created-by: linkerd/cli stable-2.11.4
 spec:
   maxUnavailable: 1
   selector:

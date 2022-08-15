@@ -371,7 +371,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   podSelector:
     matchLabels:
@@ -387,7 +387,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   server:
     name: admin
@@ -404,7 +404,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   podSelector:
     matchLabels:
@@ -420,7 +420,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   server:
     name: proxy-admin
@@ -441,7 +441,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -456,12 +456,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: metrics-api
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     component: metrics-api
   name: metrics-api
   namespace: linkerd-viz
@@ -475,7 +475,7 @@ spec:
     metadata:
       annotations:
         checksum/config: 951a7b61ff59229914ca604c671353e5fdc0eda710bde2bfbb50c9225225babe
-        linkerd.io/created-by: linkerd/helm stable-2.11.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.4
       labels:
         linkerd.io/extension: viz
         component: metrics-api
@@ -490,7 +490,7 @@ spec:
         - -cluster-domain=cluster.local
         - -prometheus-url=http://prometheus.linkerd-viz.svc.cluster.local:9090
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/metrics-api:stable-2.11.2
+        image: cr.l5d.io/linkerd/metrics-api:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -522,7 +522,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   podSelector:
     matchLabels:
@@ -540,7 +540,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   server:
     name: metrics-api
@@ -563,7 +563,7 @@ metadata:
     component: grafana
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 data:
   grafana.ini: |-
     instance_name = grafana
@@ -622,7 +622,7 @@ metadata:
     component: grafana
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -637,12 +637,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: grafana
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     component: grafana
     namespace: linkerd-viz
   name: grafana
@@ -657,7 +657,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.11.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.4
       labels:
         linkerd.io/extension: viz
         component: grafana
@@ -673,7 +673,7 @@ spec:
         # see https://github.com/grafana/grafana/issues/20096
         - name: GODEBUG
           value: netdns=go
-        image: cr.l5d.io/linkerd/grafana:stable-2.11.2
+        image: cr.l5d.io/linkerd/grafana:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -721,7 +721,7 @@ metadata:
     linkerd.io/extension: viz
     component: grafana
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   podSelector:
     matchLabels:
@@ -739,7 +739,7 @@ metadata:
     linkerd.io/extension: viz
     component: grafana
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   server:
     name: grafana
@@ -760,7 +760,7 @@ metadata:
     component: prometheus
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 data:
   prometheus.yml: |-
     global:
@@ -905,7 +905,7 @@ metadata:
     component: prometheus
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -920,12 +920,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     component: prometheus
     namespace: linkerd-viz
   name: prometheus
@@ -940,7 +940,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.11.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.4
       labels:
         linkerd.io/extension: viz
         component: prometheus
@@ -1008,7 +1008,7 @@ metadata:
     component: tap
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1026,12 +1026,12 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: tap
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     component: tap
     namespace: linkerd-viz
   name: tap
@@ -1047,7 +1047,7 @@ spec:
     metadata:
       annotations:
         checksum/config: 49b5b89d0b9cb1e526af2c6f265d007b9dafcc448b28b74728aeefbd3c9c2350
-        linkerd.io/created-by: linkerd/helm stable-2.11.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.4
       labels:
         linkerd.io/extension: viz
         component: tap
@@ -1063,7 +1063,7 @@ spec:
         - -log-format=plain
         - -identity-trust-domain=cluster.local
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/tap:stable-2.11.2
+        image: cr.l5d.io/linkerd/tap:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1105,7 +1105,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   podSelector:
     matchLabels:
@@ -1123,7 +1123,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   server:
     name: tap-api
@@ -1202,7 +1202,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1217,7 +1217,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: tap-injector
@@ -1234,7 +1234,7 @@ spec:
     metadata:
       annotations:
         checksum/config: 3e0597f5811299c48cab957e1f340e0ef41ccc87e88540fa0bd0e216d89d48ff
-        linkerd.io/created-by: linkerd/helm stable-2.11.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.4
       labels:
         linkerd.io/extension: viz
         component: tap-injector
@@ -1248,7 +1248,7 @@ spec:
         - -log-level=info
         - -log-format=plain
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/tap:stable-2.11.2
+        image: cr.l5d.io/linkerd/tap:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1288,7 +1288,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   podSelector:
     matchLabels:
@@ -1306,7 +1306,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   server:
     name: tap-injector-webhook
@@ -1327,7 +1327,7 @@ metadata:
     component: web
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
 spec:
   type: ClusterIP
   selector:
@@ -1345,12 +1345,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.11.2
+    linkerd.io/created-by: linkerd/helm stable-2.11.4
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: web
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.11.2
+    app.kubernetes.io/version: stable-2.11.4
     component: web
     namespace: linkerd-viz
   name: web
@@ -1365,7 +1365,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.11.2
+        linkerd.io/created-by: linkerd/helm stable-2.11.4
       labels:
         linkerd.io/extension: viz
         component: web
@@ -1384,7 +1384,7 @@ spec:
         - -log-format=plain
         - -enforced-host=^(localhost|127\.0\.0\.1|web\.linkerd-viz\.svc\.cluster\.local|web\.linkerd-viz\.svc|\[::1\])(:\d+)?$
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/web:stable-2.11.2
+        image: cr.l5d.io/linkerd/web:stable-2.11.4
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
