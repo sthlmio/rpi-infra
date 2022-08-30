@@ -14,6 +14,7 @@ linkerd install \
   --set-file profileValidator.caBundle=ca.crt \
   > components.yaml
 
+linkerd upgrade --crds > crds.yaml
 linkerd upgrade > components.yaml
 
 ```
