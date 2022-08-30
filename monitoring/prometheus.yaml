@@ -22,7 +22,7 @@ spec:
       enabled: false
     server:
       nodeSelector:
-        kubernetes.io/hostname: rp3
+        "kubernetes.io/hostname": "rp3"
       statefulSet:
         enabled: true
       strategy:
