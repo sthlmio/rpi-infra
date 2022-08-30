@@ -12,3 +12,4 @@ resources:
 - ./grafana-dashboard-flux-cluster.yaml
 - ./grafana-dashboard-flux-control-plane.yaml
 - ./grafana-dashboard-flux-logs.yaml
+- ./grafana-dashboard-cert-manager.yaml
