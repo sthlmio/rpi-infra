@@ -8,3 +8,6 @@ resources:
 - ./grafana-dashboard-node-exporter.yaml
 - ./grafana-dashboard-pod.yaml
 - ./grafana-dashboard-kubernetes-cluster.yaml
+- ./grafana-dashboard-flux-cluster.yaml
+- ./grafana-dashboard-flux-control-plane.yaml
+- ./grafana-dashboard-flux-logs.yaml
