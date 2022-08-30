@@ -21,7 +21,8 @@ spec:
     kubeStateMetrics:
       enabled: false
     server:
-      nodeSelector: rp3
+      nodeSelector:
+        kubernetes.io/hostname: rp3
       statefulSet:
         enabled: true
       strategy:
