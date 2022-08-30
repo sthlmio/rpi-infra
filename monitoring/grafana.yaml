@@ -36,3 +36,6 @@ spec:
         - name: Prometheus
           type: prometheus
           url: http://prometheus-server.monitoring.svc.cluster.local
+        - name: Prometheus (linkerd)
+          type: prometheus
+          url: http://prometheus.linkerd-viz.svc.cluster.local
