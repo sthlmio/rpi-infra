@@ -17,3 +17,7 @@ spec:
   interval: 1m0s
   values:
     installCRDs: true
+    prometheus:
+      enabled: true
+      servicemonitor:
+        enabled: true
