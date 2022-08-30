@@ -35,7 +35,9 @@ spec:
         datasources:
         - name: Prometheus
           type: prometheus
+          uid: prometheus
           url: http://prometheus-server.monitoring.svc.cluster.local
         - name: Prometheus (linkerd)
           type: prometheus
+          uid: prometheus_linkerd
           url: http://prometheus.linkerd-viz.svc.cluster.local:9090

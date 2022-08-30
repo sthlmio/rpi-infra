@@ -9,16 +9,7 @@ metadata:
 data:
   grafana-dashboard-linkerd-health.json: |-
     {
-    "__inputs": [
-      {
-        "name": "DS_PROMETHEUS_(LINKERD)",
-        "label": "Prometheus (linkerd)",
-        "description": "",
-        "type": "datasource",
-        "pluginId": "prometheus",
-        "pluginName": "Prometheus (linkerd)"
-      }
-    ],
+    "__inputs": [],
     "__elements": {},
     "__requires": [
       {
@@ -119,7 +110,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 0,
         "fillGradient": 0,
@@ -160,7 +151,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "process_virtual_memory_bytes{job=\"linkerd-proxy\"}",
             "format": "time_series",
@@ -171,7 +162,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "process_resident_memory_bytes{job=\"linkerd-proxy\"}",
             "format": "time_series",
@@ -218,7 +209,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 0,
         "fillGradient": 0,
@@ -259,7 +250,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "sum(irate(process_cpu_seconds_total{job=\"linkerd-proxy\"}[20s])) by (namespace, pod)",
             "format": "time_series",
@@ -306,7 +297,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 0,
         "fillGradient": 0,
@@ -347,7 +338,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "process_open_fds{job=\"linkerd-proxy\"}",
             "format": "time_series",
@@ -424,7 +415,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -465,7 +456,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "sum(irate(response_total{classification=\"success\", deployment!=\"\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\"}[30s])) by (pod) / sum(irate(response_total{deployment!=\"\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\"}[30s])) by (pod)",
             "format": "time_series",
@@ -512,7 +503,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 0,
         "fillGradient": 0,
@@ -553,7 +544,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "sum(irate(request_total{deployment!=\"\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\"}[30s])) by (pod)",
             "format": "time_series",
@@ -600,7 +591,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "description": "",
         "fill": 1,
@@ -642,7 +633,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.95, sum(rate(response_latency_ms_bucket{deployment!=\"\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\"}[30s])) by (le, pod))",
             "format": "time_series",
@@ -749,7 +740,7 @@ data:
             "dashes": false,
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "fill": 1,
             "gridPos": {
@@ -785,7 +776,7 @@ data:
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS_(LINKERD)}"
+                  "uid": "prometheus_linkerd"
                 },
                 "expr": "tcp_close_total{deployment=\"$deployment\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\",errno!=\"\"}",
                 "format": "time_series",
@@ -832,7 +823,7 @@ data:
             "dashes": false,
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "fill": 0,
             "gridPos": {
@@ -868,7 +859,7 @@ data:
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS_(LINKERD)}"
+                  "uid": "prometheus_linkerd"
                 },
                 "expr": "tcp_open_connections{deployment=\"$deployment\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\"}",
                 "format": "time_series",
@@ -920,7 +911,7 @@ data:
             "dataFormat": "timeseries",
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "gridPos": {
               "h": 7,
@@ -942,7 +933,7 @@ data:
               {
                 "datasource": {
                   "type": "prometheus",
-                  "uid": "${DS_PROMETHEUS_(LINKERD)}"
+                  "uid": "prometheus_linkerd"
                 },
                 "expr": "tcp_connection_duration_ms_bucket{deployment=\"$deployment\", namespace=~\"$namespace|$namespace-viz\", direction=\"inbound\"}",
                 "format": "time_series",
@@ -1017,7 +1008,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -1058,7 +1049,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_goroutines{job=\"linkerd-controller\"}",
             "format": "time_series",
@@ -1104,7 +1095,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -1145,7 +1136,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "process_resident_memory_bytes{job=\"linkerd-controller\"}",
             "format": "time_series",
@@ -1156,7 +1147,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "process_virtual_memory_bytes{job=\"linkerd-controller\"}",
             "format": "time_series",
@@ -1202,7 +1193,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -1243,7 +1234,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "process_open_fds{job=\"linkerd-controller\"}",
             "format": "time_series",
@@ -1289,7 +1280,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1324,7 +1315,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_threads{job=\"linkerd-controller\"}",
             "format": "time_series",
@@ -1397,7 +1388,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1432,7 +1423,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "sum(irate(http_server_requests_total{job=\"linkerd-controller\"}[30s])) by (component, method, code)",
             "format": "time_series",
@@ -1478,7 +1469,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1513,7 +1504,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.5, sum(rate(http_server_request_latency_seconds_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, method, code))",
             "format": "time_series",
@@ -1524,7 +1515,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.95, sum(rate(http_server_request_latency_seconds_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, method, code))",
             "format": "time_series",
@@ -1535,7 +1526,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.99, sum(rate(http_server_request_latency_seconds_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, method, code))",
             "format": "time_series",
@@ -1581,7 +1572,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1616,7 +1607,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.5, sum(rate(http_server_response_size_bytes_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, method, code))",
             "format": "time_series",
@@ -1627,7 +1618,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.95, sum(rate(http_server_response_size_bytes_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, method, code))",
             "format": "time_series",
@@ -1638,7 +1629,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.99, sum(rate(http_server_response_size_bytes_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, method, code))",
             "format": "time_series",
@@ -1684,7 +1675,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1719,7 +1710,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "sum(irate(http_client_requests_total{job=\"linkerd-controller\"}[30s])) by (component, client, method, code)",
             "format": "time_series",
@@ -1765,7 +1756,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1800,7 +1791,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.5, sum(rate(http_client_request_latency_seconds_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, client, method, code))",
             "format": "time_series",
@@ -1811,7 +1802,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.95, sum(rate(http_client_request_latency_seconds_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, client, method, code))",
             "format": "time_series",
@@ -1822,7 +1813,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "histogram_quantile(0.99, sum(rate(http_client_request_latency_seconds_bucket{job=\"linkerd-controller\"}[30s])) by (le, component, client, method, code))",
             "format": "time_series",
@@ -1868,7 +1859,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -1903,7 +1894,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "sum(http_client_in_flight_requests{job=\"linkerd-controller\"}) by (component, client)",
             "format": "time_series",
@@ -2002,7 +1993,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -2037,7 +2028,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_memstats_alloc_bytes{job=\"linkerd-controller\", component=\"$component\"}",
             "format": "time_series",
@@ -2048,7 +2039,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "irate(go_memstats_alloc_bytes_total{job=\"linkerd-controller\", component=\"$component\"}[30s])",
             "format": "time_series",
@@ -2059,7 +2050,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_memstats_stack_inuse_bytes{job=\"linkerd-controller\", component=\"$component\"}",
             "format": "time_series",
@@ -2070,7 +2061,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_memstats_heap_inuse_bytes{job=\"linkerd-controller\", component=\"$component\"}",
             "format": "time_series",
@@ -2116,7 +2107,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -2151,7 +2142,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_gc_duration_seconds{job=\"linkerd-controller\", quantile=\"0.5\", component=\"$component\"}",
             "format": "time_series",
@@ -2162,7 +2153,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_gc_duration_seconds{job=\"linkerd-controller\", quantile=\"0.75\", component=\"$component\"}",
             "format": "time_series",
@@ -2173,7 +2164,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "go_gc_duration_seconds{job=\"linkerd-controller\", quantile=\"1\", component=\"$component\"}",
             "format": "time_series",
@@ -2219,7 +2210,7 @@ data:
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS_(LINKERD)}"
+          "uid": "prometheus_linkerd"
         },
         "fill": 1,
         "gridPos": {
@@ -2254,7 +2245,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "irate(grpc_server_msg_sent_total{job=\"linkerd-controller\", component=\"$component\"}[30s])",
             "format": "time_series",
@@ -2265,7 +2256,7 @@ data:
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "${DS_PROMETHEUS_(LINKERD)}"
+              "uid": "prometheus_linkerd"
             },
             "expr": "irate(grpc_server_msg_received_total{job=\"linkerd-controller\", component=\"$component\"}[30s])",
             "format": "time_series",
@@ -2372,7 +2363,7 @@ data:
           "current": {},
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_(LINKERD)}"
+            "uid": "prometheus_linkerd"
           },
           "definition": "",
           "hide": 2,
@@ -2399,7 +2390,7 @@ data:
           "current": {},
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_(LINKERD)}"
+            "uid": "prometheus_linkerd"
           },
           "definition": "",
           "hide": 2,
@@ -2426,7 +2417,7 @@ data:
           "current": {},
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_(LINKERD)}"
+            "uid": "prometheus_linkerd"
           },
           "definition": "",
           "hide": 0,
@@ -2453,7 +2444,7 @@ data:
           "current": {},
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS_(LINKERD)}"
+            "uid": "prometheus_linkerd"
           },
           "definition": "",
           "hide": 0,
