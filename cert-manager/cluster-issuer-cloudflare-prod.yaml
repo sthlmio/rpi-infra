@@ -12,7 +12,7 @@ spec:
     solvers:
       - dns01:
           cloudflare:
-            email: fredrik@fre.la
+            email: fredrik@sthlm.io
             apiKeySecretRef:
               name: cluster-issuer-cloudflare
               key: cloudflare_api_key
