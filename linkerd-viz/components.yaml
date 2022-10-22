@@ -271,7 +271,7 @@ rules:
   resources: ["serviceprofiles"]
   verbs: ["list"]
 - apiGroups: [""]
-  resources: ["nodes", "pods"]
+  resources: ["nodes", "pods", "services"]
   verbs: ["list"]
 - apiGroups: ["apiregistration.k8s.io"]
   resources: ["apiservices"]
@@ -355,7 +355,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   podSelector:
     matchLabels:
@@ -371,7 +371,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   targetRef:
     group: policy.linkerd.io
@@ -390,7 +390,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   # Ideally, this should be restricted to the actual set of IPs kubelet uses in
   # a cluster. This can't easily be discovered.
@@ -406,7 +406,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   podSelector:
     matchLabels:
@@ -422,7 +422,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   targetRef:
     group: policy.linkerd.io
@@ -445,7 +445,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
 spec:
   type: ClusterIP
@@ -461,14 +461,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
     config.linkerd.io/proxy-await: "enabled"
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: metrics-api
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.12.1
+    app.kubernetes.io/version: stable-2.12.2
     component: metrics-api
   name: metrics-api
   namespace: linkerd-viz
@@ -482,7 +482,7 @@ spec:
     metadata:
       annotations:
         checksum/config: b73fb1bf343c4203fbab8ee108c5eba2e07d184177e204677dc83d4cad2cd12b
-        linkerd.io/created-by: linkerd/helm stable-2.12.1
+        linkerd.io/created-by: linkerd/helm stable-2.12.2
         linkerd.io/inject: enabled
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
@@ -500,7 +500,7 @@ spec:
         - -cluster-domain=cluster.local
         - -prometheus-url=http://prometheus.linkerd-viz.svc.cluster.local:9090
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/metrics-api:stable-2.12.1
+        image: cr.l5d.io/linkerd/metrics-api:stable-2.12.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -532,7 +532,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   podSelector:
     matchLabels:
@@ -550,7 +550,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   targetRef:
     group: policy.linkerd.io
@@ -570,7 +570,7 @@ metadata:
     linkerd.io/extension: viz
     component: metrics-api
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   identityRefs:
   - kind: ServiceAccount
@@ -589,7 +589,7 @@ metadata:
     component: prometheus
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 data:
   prometheus.yml: |-
     global:
@@ -723,7 +723,7 @@ metadata:
     component: prometheus
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
 spec:
   type: ClusterIP
@@ -739,14 +739,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
     config.linkerd.io/proxy-await: "enabled"
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.12.1
+    app.kubernetes.io/version: stable-2.12.2
     component: prometheus
     namespace: linkerd-viz
   name: prometheus
@@ -761,7 +761,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.12.1
+        linkerd.io/created-by: linkerd/helm stable-2.12.2
         linkerd.io/inject: enabled
       labels:
         linkerd.io/extension: viz
@@ -830,7 +830,7 @@ metadata:
     component: tap
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
 spec:
   type: ClusterIP
@@ -849,14 +849,14 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
     config.linkerd.io/proxy-await: "enabled"
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: tap
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.12.1
+    app.kubernetes.io/version: stable-2.12.2
     component: tap
     namespace: linkerd-viz
   name: tap
@@ -872,7 +872,7 @@ spec:
     metadata:
       annotations:
         checksum/config: 49b5b89d0b9cb1e526af2c6f265d007b9dafcc448b28b74728aeefbd3c9c2350
-        linkerd.io/created-by: linkerd/helm stable-2.12.1
+        linkerd.io/created-by: linkerd/helm stable-2.12.2
         linkerd.io/inject: enabled
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
@@ -891,7 +891,7 @@ spec:
         - -log-format=plain
         - -identity-trust-domain=cluster.local
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/tap:stable-2.12.1
+        image: cr.l5d.io/linkerd/tap:stable-2.12.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -933,7 +933,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   podSelector:
     matchLabels:
@@ -951,7 +951,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   targetRef:
     group: policy.linkerd.io
@@ -1035,7 +1035,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
 spec:
   type: ClusterIP
@@ -1051,7 +1051,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
     config.linkerd.io/proxy-await: "enabled"
   labels:
@@ -1070,7 +1070,7 @@ spec:
     metadata:
       annotations:
         checksum/config: edc4efd2fdbaa5a8a0e4438b0a21e3ff348c8626554396342daa10e306baddc0
-        linkerd.io/created-by: linkerd/helm stable-2.12.1
+        linkerd.io/created-by: linkerd/helm stable-2.12.2
         linkerd.io/inject: enabled
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
@@ -1087,7 +1087,7 @@ spec:
         - -log-level=info
         - -log-format=plain
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/tap:stable-2.12.1
+        image: cr.l5d.io/linkerd/tap:stable-2.12.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -1127,7 +1127,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   podSelector:
     matchLabels:
@@ -1145,7 +1145,7 @@ metadata:
     linkerd.io/extension: viz
     component: tap-injector
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   targetRef:
     group: policy.linkerd.io
@@ -1164,7 +1164,7 @@ metadata:
   labels:
     linkerd.io/extension: viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
 spec:
   # Ideally, this should be restricted to the actual set of IPs the kubelet API
   # server uses for webhooks in a cluster. This can't easily be discovered.
@@ -1185,7 +1185,7 @@ metadata:
     component: web
     namespace: linkerd-viz
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
 spec:
   type: ClusterIP
@@ -1204,14 +1204,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    linkerd.io/created-by: linkerd/helm stable-2.12.1
+    linkerd.io/created-by: linkerd/helm stable-2.12.2
     linkerd.io/inject: enabled
     config.linkerd.io/proxy-await: "enabled"
   labels:
     linkerd.io/extension: viz
     app.kubernetes.io/name: web
     app.kubernetes.io/part-of: Linkerd
-    app.kubernetes.io/version: stable-2.12.1
+    app.kubernetes.io/version: stable-2.12.2
     component: web
     namespace: linkerd-viz
   name: web
@@ -1226,7 +1226,7 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/helm stable-2.12.1
+        linkerd.io/created-by: linkerd/helm stable-2.12.2
         linkerd.io/inject: enabled
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       labels:
@@ -1245,7 +1245,7 @@ spec:
         - -log-format=plain
         - -enforced-host=^(localhost|127\.0\.0\.1|web\.linkerd-viz\.svc\.cluster\.local|web\.linkerd-viz\.svc|\[::1\])(:\d+)?$
         - -enable-pprof=false
-        image: cr.l5d.io/linkerd/web:stable-2.12.1
+        image: cr.l5d.io/linkerd/web:stable-2.12.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
