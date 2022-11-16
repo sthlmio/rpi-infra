@@ -46,6 +46,8 @@ spec:
           value: "true"
         - name: bgp_routerinterface
           value: "eth0"
+        - name: vip_interface
+          value: "eth0"
         - name: bgp_as
           value: "64512"
         - name: bgp_peeraddress
